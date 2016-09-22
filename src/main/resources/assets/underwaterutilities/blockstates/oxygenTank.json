@@ -1,0 +1,68 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"model": "underwaterutilities:tank"
+	},
+	"variants": {
+		"inventory": {
+			"transform": "forge:default-item"
+		},
+		"level": {
+			"0": {
+				"textures": {
+					"side": "underwaterutilities:blocks/tank/side_0"
+				}
+			},
+			"1": {
+				"textures": {
+					"side": "underwaterutilities:blocks/tank/side_1"
+				}
+			},
+			"2": {
+				"textures": {
+					"side": "underwaterutilities:blocks/tank/side_2"
+				}
+			},
+			"3": {
+				"textures": {
+					"side": "underwaterutilities:blocks/tank/side_3"
+				}
+			},
+			"4": {
+				"textures": {
+					"side": "underwaterutilities:blocks/tank/side_4"
+				}
+			},
+			"5": {
+				"textures": {
+					"side": "underwaterutilities:blocks/tank/side_5"
+				}
+			},
+			"6": {
+				"textures": {
+					"side": "underwaterutilities:blocks/tank/side_6"
+				}
+			},
+			"7": {
+				"textures": {
+					"side": "underwaterutilities:blocks/tank/side_7"
+				}
+			},
+			"8": {
+				"textures": {
+					"side": "underwaterutilities:blocks/tank/side_8"
+				}
+			},
+			"9": {
+				"textures": {
+					"side": "underwaterutilities:blocks/tank/side_9"
+				}
+			},
+			"10": {
+				"textures": {
+					"side": "underwaterutilities:blocks/tank/side_10"
+				}
+			}
+		}
+	}
+}
