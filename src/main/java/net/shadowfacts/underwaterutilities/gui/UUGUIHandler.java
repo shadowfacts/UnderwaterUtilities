@@ -31,7 +31,7 @@ public class UUGUIHandler implements IGuiHandler {
 		BlockPos pos = new BlockPos(x, y, z);
 		switch (ID) {
 			case TANK:
-				return GUITank.create(player.inventory, pos, (TileEntityTank)world.getTileEntity(pos));
+				return GUITank.create(pos, player.inventory, (TileEntityTank)world.getTileEntity(pos));
 			default:
 				return null;
 		}

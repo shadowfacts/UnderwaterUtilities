@@ -1,52 +1,56 @@
 package net.shadowfacts.underwaterutilities.block.tank;
 
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.resources.I18n;
+import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
-import net.shadowfacts.underwaterutilities.UnderwaterUtilities;
-import net.shadowfacts.underwaterutilities.gui.component.TexturedOxygenIndicator;
 import net.shadowfacts.shadowmc.ShadowMC;
-import net.shadowfacts.shadowmc.gui.component.GUIComponentText;
-import net.shadowfacts.shadowmc.gui.component.GUIComponentTexture;
-import net.shadowfacts.shadowmc.gui.mcwrapper.GuiContainerWrapper;
-import net.shadowfacts.shadowmc.gui.mcwrapper.MCBaseGUIContainer;
 import net.shadowfacts.shadowmc.network.PacketRequestTEUpdate;
 import net.shadowfacts.shadowmc.oxygen.OxygenCaps;
+import net.shadowfacts.shadowmc.ui.element.button.UIImage;
+import net.shadowfacts.shadowmc.ui.element.view.UIFixedView;
+import net.shadowfacts.shadowmc.ui.util.UIBuilder;
+import net.shadowfacts.underwaterutilities.UnderwaterUtilities;
+import net.shadowfacts.underwaterutilities.gui.element.UITexturedOxygenIndicator;
 
 /**
  * @author shadowfacts
  */
-public class GUITank extends MCBaseGUIContainer {
+public class GUITank {
 
 	private static final ResourceLocation BG = new ResourceLocation(UnderwaterUtilities.modId, "textures/gui/tank.png");
 
-	private TileEntityTank tank;
+	public static GuiContainer create(BlockPos pos, InventoryPlayer playerInv, TileEntityTank tank) {
+		UIFixedView root = new UIFixedView(176, 166, "root");
 
-	public GUITank(GuiContainerWrapper wrapper, TileEntityTank tank) {
-		super(wrapper);
-		this.tank = tank;
+		UIImage bg = new UIImage(BG, 176, 166, "bg");
+		root.add(bg);
 
-		addChild(new GUIComponentTexture(0, -13, xSize, ySize + 13, BG));
-		addChild(new GUIComponentText(5, -10, I18n.format("tile.oxygenTank.name")));
-		addChild(new TexturedOxygenIndicator(79, 12, 18, 66, tank.getCapability(OxygenCaps.HANDLER, EnumFacing.NORTH)));
-	}
+		UIFixedView top = new UIFixedView(176, 166 / 2, "top");
 
-	@Override
-	public void update() {
-		super.update();
+		UITexturedOxygenIndicator oxygenIndicator = new UITexturedOxygenIndicator(tank.getCapability(OxygenCaps.HANDLER, EnumFacing.NORTH), "oxygen");
+		top.add(oxygenIndicator);
 
-		ShadowMC.network.sendToServer(new PacketRequestTEUpdate(tank));
-	}
+		root.add(top);
 
-	public static GuiScreen create(InventoryPlayer inv, BlockPos pos, TileEntityTank tank) {
-		GuiContainerWrapper wrapper = new GuiContainerWrapper(new ContainerTank(pos, inv, tank));
-		GUITank gui = new GUITank(wrapper, tank);
-		gui.setZLevel(0);
-		wrapper.gui = gui;
-		return wrapper;
+		Runnable updateHandler = new Runnable() {
+			private int ticks = 0;
+			@Override
+			public void run() {
+				ticks++;
+				if (ticks % 20 == 0) {
+					ticks = 0;
+					ShadowMC.network.sendToServer(new PacketRequestTEUpdate(tank));
+				}
+			}
+		};
+
+		return new UIBuilder()
+				.add(root)
+				.setUpdateHandler(updateHandler)
+				.style(UnderwaterUtilities.modId + ":tank")
+				.createContainer(new ContainerTank(pos, playerInv, tank));
 	}
 
 }
