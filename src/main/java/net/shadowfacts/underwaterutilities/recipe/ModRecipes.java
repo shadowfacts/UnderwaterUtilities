@@ -20,6 +20,8 @@ public class ModRecipes {
 
 		GameRegistry.addRecipe(new ShapedOreRecipe(blocks.tank, " i ", "I I", "I I", 'i', "nuggetIron", 'I', "ingotIron"));
 
+		GameRegistry.addRecipe(new ShapedOreRecipe(items.snorkel, " ls", "lsl", " l ", 'l', "leather", 's', "sugarcane"));
+
 	}
 
 }

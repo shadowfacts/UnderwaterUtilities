@@ -15,6 +15,7 @@ public class ModItems extends net.shadowfacts.shadowmc.item.ModItems {
 	public ItemTank tank;
 	public ItemBase blade;
 	public ItemBase fan;
+	public ItemSnorkel snorkel;
 
 	@Override
 	public void init() {
@@ -24,6 +25,7 @@ public class ModItems extends net.shadowfacts.shadowmc.item.ModItems {
 		tank = register(new ItemTank());
 		blade = register(new ItemBase("blade"));
 		fan = register(new ItemBase("fan"));
+		snorkel = register(new ItemSnorkel());
 	}
 
 }

@@ -45,7 +45,7 @@ public class ItemTank extends ItemArmor implements ItemModelProvider {
 	public void initItemModel() {
 		ModelLoader.setCustomMeshDefinition(this, MeshWrapper.of(stack -> {
 			OxygenHandler handler = stack.getCapability(OxygenCaps.HANDLER, EnumFacing.NORTH);
-			int level = (int)((handler.getStored() / (float)handler.getCapacity()) * 10);
+			int level = (int)((handler.getStored() / handler.getCapacity()) * 10);
 			return new ModelResourceLocation(UnderwaterUtilities.modId + ":scubaTank", "level=" + level);
 		}));
 	}
