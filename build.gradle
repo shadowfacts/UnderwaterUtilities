@@ -8,10 +8,12 @@ buildscript {
 	}
 	dependencies {
 		classpath "net.minecraftforge.gradle:ForgeGradle:2.2-SNAPSHOT"
+		classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlin_version}"
 	}
 }
 
 apply plugin: "net.minecraftforge.gradle.forge"
+apply plugin: "kotlin"
 
 version = mc_version + "-" + mod_version
 
@@ -24,7 +26,8 @@ minecraft {
 
 	mappings = mcp_mappings
 
-	replaceIn "UnderwaterUtilities.java"
+	replaceIn "UnderwaterUtilities.kt"
+	replaceIn "Reference.kt"
 	replace "@VERSION@", mod_version
 }
 
@@ -56,5 +59,6 @@ repositories {
 
 dependencies {
 	deobfCompile group: "net.shadowfacts", name: "ShadowMC", version: mc_version + "-" + shadowmc_version
+	deobfCompile group: "net.shadowfacts", name: "Forgelin", version: forgelin_version
 	deobfCompile group: "net.darkhax.tesla", name: "Tesla", version: mc_version + "-" + tesla_version
 }
