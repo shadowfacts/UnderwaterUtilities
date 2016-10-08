@@ -1,7 +1,7 @@
 tile.oxygenCollector.name=Oxygen Collector
 tile.oxygenTank.name=Oxygen Tank
 
-item.goggles.name=Goggles
-item.goggleLens.name=Goggle Lens
-item.scubaBreather.name=SCUBA Breather
-item.scubaTank.name=SCUBA Tank
+net.shadowfacts.underwaterutilities.api.item.goggles.name=Goggles
+net.shadowfacts.underwaterutilities.api.item.goggleLens.name=Goggle Lens
+net.shadowfacts.underwaterutilities.api.item.scubaBreather.name=SCUBA Breather
+net.shadowfacts.underwaterutilities.api.item.scubaTank.name=SCUBA Tank

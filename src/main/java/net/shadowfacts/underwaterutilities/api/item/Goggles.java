@@ -1,21 +1,20 @@
 package net.shadowfacts.underwaterutilities.api.item;
 
-import net.minecraft.nbt.NBTBase;
-import net.minecraft.nbt.NBTTagByte;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.INBTSerializable;
 
 /**
  * @author shadowfacts
  */
-public class Goggles implements INBTSerializable {
+public class Goggles implements INBTSerializable<NBTTagCompound> {
 
 	@Override
-	public NBTBase serializeNBT() {
-		return new NBTTagByte((byte)0);
+	public NBTTagCompound serializeNBT() {
+		return new NBTTagCompound();
 	}
 
 	@Override
-	public void deserializeNBT(NBTBase nbt) {
+	public void deserializeNBT(NBTTagCompound nbt) {
 
 	}
 
