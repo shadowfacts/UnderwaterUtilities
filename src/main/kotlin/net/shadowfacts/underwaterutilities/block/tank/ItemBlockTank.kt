@@ -23,7 +23,7 @@ class ItemBlockTank(block: Block) : ItemBlock(block) {
 		setHasSubtypes(true)
 	}
 
-	override fun getSubItems(item: Item, tab: CreativeTabs, subItems: MutableList<ItemStack>) {
+	override fun getSubItems(item: Item, tab: CreativeTabs?, subItems: MutableList<ItemStack>) {
 		subItems.add(ItemStack(this))
 		val stack2 = ItemStack(this)
 		(stack2.getCapability(OxygenCaps.HANDLER, null) as OxygenHandlerImpl).stored = 20000f
