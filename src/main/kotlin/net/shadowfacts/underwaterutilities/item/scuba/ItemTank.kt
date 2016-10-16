@@ -11,6 +11,7 @@ import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.util.EnumFacing
 import net.minecraftforge.client.model.ModelLoader
 import net.minecraftforge.common.capabilities.ICapabilityProvider
+import net.shadowfacts.shadowmc.ShadowMC
 import net.shadowfacts.shadowmc.item.ItemModelProvider
 import net.shadowfacts.shadowmc.oxygen.OxygenCaps
 import net.shadowfacts.shadowmc.oxygen.impl.OxygenTankProvider
@@ -34,11 +35,12 @@ class ItemTank : ItemArmor(UUMaterials.SCUBA, 0, EntityEquipmentSlot.CHEST), Ite
 	}
 
 	override fun initItemModel() {
-		ModelLoader.setCustomMeshDefinition(this, MeshWrapper.of { stack ->
-			val handler = stack.getCapability(OxygenCaps.HANDLER, EnumFacing.NORTH)
-			val level = (handler.stored / handler.capacity * 10).toInt()
-			ModelResourceLocation("$MOD_ID:scubaTank", "level=" + level)
-		})
+		ShadowMC.proxy.registerItemModel(this, 0, registryName)
+//		ModelLoader.setCustomMeshDefinition(this, MeshWrapper.of { stack ->
+//			val handler = stack.getCapability(OxygenCaps.HANDLER, EnumFacing.NORTH)
+//			val level = (handler.stored / handler.capacity * 10).toInt()
+//			ModelResourceLocation("$MOD_ID:scubaTank", "level=" + level)
+//		})
 	}
 
 	override fun addInformation(stack: ItemStack, player: EntityPlayer, tooltip: MutableList<String>, advanced: Boolean) {
