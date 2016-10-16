@@ -17,7 +17,7 @@ import net.shadowfacts.underwaterutilities.recipe.ModRecipes
 /**
  * @author shadowfacts
  */
-@Mod(modid = MOD_ID, name = NAME, version = VERSION, dependencies = "required-after:shadowmc@[3.4.8,);", acceptedMinecraftVersions = "[1.10.2]", guiFactory = "net.shadowfacts.underwaterutilities.gui.UUGUIFactory", modLanguageAdapter = "net.shadowfacts.forgelin.KotlinAdapter")
+@Mod(modid = MOD_ID, name = NAME, version = VERSION, dependencies = "required-after:tesla;required-after:shadowmc@[3.4.8,);", acceptedMinecraftVersions = "[1.10.2]", guiFactory = "net.shadowfacts.underwaterutilities.gui.UUGUIFactory", modLanguageAdapter = "net.shadowfacts.forgelin.KotlinAdapter")
 object UnderwaterUtilities {
 
 	//	Content
