@@ -23,6 +23,9 @@ object ModRecipes {
 
 		GameRegistry.addRecipe(ShapedOreRecipe(items.snorkel, " ls", "lsl", " l ", 'l', "leather", 's', "sugarcane"))
 
+		GameRegistry.addRecipe(ShapedOreRecipe(items.breather, " g ", "lll", 'g', items.goggles, 'l', "leather"))
+		GameRegistry.addRecipe(ShapedOreRecipe(items.tank, "iSi", "I I", 'i', "nuggetIron", 'I', "ingotIron", 'S', "slimeball"))
+
 	}
 
 }
