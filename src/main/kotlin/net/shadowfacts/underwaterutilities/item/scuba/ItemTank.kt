@@ -6,6 +6,7 @@ import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.inventory.EntityEquipmentSlot
+import net.minecraft.item.Item
 import net.minecraft.item.ItemArmor
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
@@ -15,6 +16,7 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider
 import net.shadowfacts.shadowmc.ShadowMC
 import net.shadowfacts.shadowmc.item.ItemModelProvider
 import net.shadowfacts.shadowmc.oxygen.OxygenCaps
+import net.shadowfacts.shadowmc.oxygen.impl.OxygenHandlerImpl
 import net.shadowfacts.shadowmc.oxygen.impl.OxygenTankProvider
 import net.shadowfacts.shadowmc.util.MeshWrapper
 import net.shadowfacts.underwaterutilities.MOD_ID
@@ -30,6 +32,14 @@ class ItemTank : ItemArmor(UUMaterials.SCUBA, 0, EntityEquipmentSlot.CHEST), Ite
 		setRegistryName("scubaTank")
 		unlocalizedName = registryName.toString()
 		creativeTab = CreativeTabs.MISC
+		hasSubtypes = true
+	}
+
+	override fun getSubItems(item: Item, tab: CreativeTabs?, subItems: MutableList<ItemStack>) {
+		subItems.add(ItemStack(this))
+		val stack2 = ItemStack(this)
+		(stack2.getCapability(OxygenCaps.HANDLER, null) as OxygenHandlerImpl).stored = 12000f
+		subItems.add(stack2)
 	}
 
 	override fun getArmorModel(entityLiving: EntityLivingBase, stack: ItemStack, armorSlot: EntityEquipmentSlot, _default: ModelBiped): ModelBiped {
