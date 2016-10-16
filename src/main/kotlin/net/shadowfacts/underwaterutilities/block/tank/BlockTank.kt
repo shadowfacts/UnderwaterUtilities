@@ -79,8 +79,10 @@ class BlockTank : BlockTE<TileEntityTank>(Material.ROCK, "oxygenTank") {
 		return false
 	}
 
-	override fun onBlockPlaced(world: World, pos: BlockPos, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float, meta: Int, placer: EntityLivingBase): IBlockState {
-		return super.onBlockPlaced(world, pos, facing, hitX, hitY, hitZ, meta, placer)
+	override fun getStateForPlacement(world: World, pos: BlockPos, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float, meta: Int, placer: EntityLivingBase, stack: ItemStack): IBlockState {
+		val handler = stack.getCapability(OxygenCaps.HANDLER, null)
+		val level = (handler.stored / handler.capacity * 10).toInt()
+		return defaultState.withProperty(LEVEL, level)
 	}
 
 	override fun onBlockPlacedBy(world: World, pos: BlockPos, state: IBlockState, placer: EntityLivingBase, stack: ItemStack) {
@@ -105,11 +107,6 @@ class BlockTank : BlockTE<TileEntityTank>(Material.ROCK, "oxygenTank") {
 	@Deprecated("")
 	override fun getStateFromMeta(meta: Int): IBlockState {
 		return defaultState.withProperty(LEVEL, meta)
-	}
-
-	@Deprecated("")
-	override fun getActualState(state: IBlockState, world: IBlockAccess, pos: BlockPos): IBlockState {
-		return state
 	}
 
 	@Deprecated("")
