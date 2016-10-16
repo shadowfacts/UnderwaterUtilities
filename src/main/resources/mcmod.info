@@ -1,0 +1,16 @@
+[
+	{
+	  "modid": "underwaterutilities",
+	  "name": "Underwater Utilities",
+	  "description": "Helpful utilities for working underwater.",
+	  "version": "${version}",
+	  "mcversion": "${mcversion}",
+	  "url": "http://github.com/shadowfacts/UnderwaterUtilities",
+	  "updateUrl": "",
+	  "authorList": ["Shadowfacts"],
+	  "credits": "",
+	  "logoFile": "",
+	  "screenshots": [],
+	  "dependencies": []
+	}
+]
