@@ -2,6 +2,7 @@ package net.shadowfacts.underwaterutilities.item
 
 import net.minecraft.block.material.Material
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
+import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.inventory.EntityEquipmentSlot
 import net.minecraft.item.ItemArmor
@@ -22,6 +23,7 @@ class ItemSnorkel : ItemArmor(UUMaterials.GOGGLES, 0, EntityEquipmentSlot.HEAD),
 	init {
 		setRegistryName("snorkel")
 		unlocalizedName = registryName.toString()
+		creativeTab = CreativeTabs.MISC
 	}
 
 	override fun initItemModel() {
@@ -39,7 +41,7 @@ class ItemSnorkel : ItemArmor(UUMaterials.GOGGLES, 0, EntityEquipmentSlot.HEAD),
 
 	private fun checkWaterLevel(player: EntityPlayer): Boolean {
 		val world = player.worldObj
-		val pos = player.position.up() // player.getPosition() is the foot position, .up() is the head positionclie
+		val pos = player.position.up() // player.getPosition() is the foot position, .up() is the head position
 		val state = world.getBlockState(pos)
 		if (state.material === Material.WATER) {
 			val upPos = pos.up()

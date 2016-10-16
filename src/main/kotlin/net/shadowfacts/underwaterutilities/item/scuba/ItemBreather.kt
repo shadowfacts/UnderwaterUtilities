@@ -1,6 +1,7 @@
 package net.shadowfacts.underwaterutilities.item.scuba
 
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
+import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.inventory.EntityEquipmentSlot
 import net.minecraft.item.ItemArmor
@@ -24,6 +25,7 @@ class ItemBreather : ItemArmor(UUMaterials.SCUBA, 0, EntityEquipmentSlot.HEAD), 
 	init {
 		setRegistryName("scubaBreather")
 		unlocalizedName = registryName.toString()
+		creativeTab = CreativeTabs.MISC
 	}
 
 	override fun initItemModel() {

@@ -6,6 +6,7 @@ import net.minecraft.block.properties.PropertyInteger
 import net.minecraft.block.state.BlockStateContainer
 import net.minecraft.block.state.IBlockState
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
+import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.item.EntityItem
 import net.minecraft.entity.player.EntityPlayer
@@ -40,6 +41,7 @@ class BlockTank : BlockTE<TileEntityTank>(Material.ROCK, "oxygenTank") {
 	init {
 		defaultState = defaultState.withProperty(LEVEL, 0)
 		unlocalizedName = registryName.toString()
+		setCreativeTab(CreativeTabs.MISC)
 	}
 
 	override fun initItemModel() {

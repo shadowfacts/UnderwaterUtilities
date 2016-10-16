@@ -1,6 +1,7 @@
 package net.shadowfacts.underwaterutilities.item
 
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
+import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.inventory.EntityEquipmentSlot
 import net.minecraft.item.ItemArmor
 import net.minecraft.item.ItemStack
@@ -22,6 +23,7 @@ class ItemGoggles : ItemArmor(UUMaterials.GOGGLES, 0, EntityEquipmentSlot.HEAD),
 	init {
 		setRegistryName("goggles")
 		unlocalizedName = registryName.toString()
+		creativeTab = CreativeTabs.MISC
 	}
 
 	override fun initItemModel() {

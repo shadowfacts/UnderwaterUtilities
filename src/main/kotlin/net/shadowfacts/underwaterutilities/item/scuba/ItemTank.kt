@@ -2,6 +2,7 @@ package net.shadowfacts.underwaterutilities.item.scuba
 
 import net.minecraft.client.model.ModelBiped
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
+import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.inventory.EntityEquipmentSlot
@@ -28,6 +29,7 @@ class ItemTank : ItemArmor(UUMaterials.SCUBA, 0, EntityEquipmentSlot.CHEST), Ite
 	init {
 		setRegistryName("scubaTank")
 		unlocalizedName = registryName.toString()
+		creativeTab = CreativeTabs.MISC
 	}
 
 	override fun getArmorModel(entityLiving: EntityLivingBase, stack: ItemStack, armorSlot: EntityEquipmentSlot, _default: ModelBiped): ModelBiped {
@@ -36,11 +38,6 @@ class ItemTank : ItemArmor(UUMaterials.SCUBA, 0, EntityEquipmentSlot.CHEST), Ite
 
 	override fun initItemModel() {
 		ShadowMC.proxy.registerItemModel(this, 0, registryName)
-//		ModelLoader.setCustomMeshDefinition(this, MeshWrapper.of { stack ->
-//			val handler = stack.getCapability(OxygenCaps.HANDLER, EnumFacing.NORTH)
-//			val level = (handler.stored / handler.capacity * 10).toInt()
-//			ModelResourceLocation("$MOD_ID:scubaTank", "level=" + level)
-//		})
 	}
 
 	override fun addInformation(stack: ItemStack, player: EntityPlayer, tooltip: MutableList<String>, advanced: Boolean) {

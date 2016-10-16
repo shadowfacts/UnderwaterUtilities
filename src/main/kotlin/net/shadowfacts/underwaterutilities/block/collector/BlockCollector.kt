@@ -4,6 +4,7 @@ import net.minecraft.block.material.Material
 import net.minecraft.block.properties.PropertyDirection
 import net.minecraft.block.state.BlockStateContainer
 import net.minecraft.block.state.IBlockState
+import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.util.EnumFacing
 import net.minecraft.util.math.BlockPos
@@ -22,6 +23,7 @@ class BlockCollector : BlockTE<TileEntityCollector>(Material.ROCK, "oxygenCollec
 	init {
 		defaultState = defaultState.withProperty(FACING, EnumFacing.NORTH)
 		unlocalizedName = registryName.toString()
+		setCreativeTab(CreativeTabs.MISC)
 	}
 
 	override fun createBlockState(): BlockStateContainer {
