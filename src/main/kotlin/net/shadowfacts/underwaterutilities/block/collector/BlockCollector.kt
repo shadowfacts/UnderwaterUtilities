@@ -21,6 +21,7 @@ class BlockCollector : BlockTE<TileEntityCollector>(Material.ROCK, "oxygenCollec
 
 	init {
 		defaultState = defaultState.withProperty(FACING, EnumFacing.NORTH)
+		unlocalizedName = registryName.toString()
 	}
 
 	override fun createBlockState(): BlockStateContainer {

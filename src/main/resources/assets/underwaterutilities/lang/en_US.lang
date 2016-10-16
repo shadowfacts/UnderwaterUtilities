@@ -1,7 +1,10 @@
-tile.oxygenCollector.name=Oxygen Collector
-tile.oxygenTank.name=Oxygen Tank
+item.underwaterutilities:goggles.name=Goggles
+item.underwaterutilities:goggleLens.name=Goggle Lens
+item.underwaterutilities:scubaBreather.name=SCUBA Breather
+item.underwaterutilities:scubaTank.name=SCUBA Tank
+item.underwaterutilities:snorkel.name=Snorkel
+item.underwaterutilities:blade.name=Blade
+item.underwaterutilities:fan.name=Fan
 
-net.shadowfacts.underwaterutilities.api.item.goggles.name=Goggles
-net.shadowfacts.underwaterutilities.api.item.goggleLens.name=Goggle Lens
-net.shadowfacts.underwaterutilities.api.item.scubaBreather.name=SCUBA Breather
-net.shadowfacts.underwaterutilities.api.item.scubaTank.name=SCUBA Tank
+tile.underwaterutilities:oxygenCollector.name=Oxygen Collector
+tile.underwaterutilities:oxygenTank.name=Oxygen Tank

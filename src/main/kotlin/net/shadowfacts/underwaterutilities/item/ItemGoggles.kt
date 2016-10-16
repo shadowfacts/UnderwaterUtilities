@@ -21,7 +21,7 @@ class ItemGoggles : ItemArmor(UUMaterials.GOGGLES, 0, EntityEquipmentSlot.HEAD),
 
 	init {
 		setRegistryName("goggles")
-		unlocalizedName = "goggles"
+		unlocalizedName = registryName.toString()
 	}
 
 	override fun initItemModel() {

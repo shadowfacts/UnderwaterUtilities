@@ -39,6 +39,7 @@ class BlockTank : BlockTE<TileEntityTank>(Material.ROCK, "oxygenTank") {
 
 	init {
 		defaultState = defaultState.withProperty(LEVEL, 0)
+		unlocalizedName = registryName.toString()
 	}
 
 	override fun initItemModel() {

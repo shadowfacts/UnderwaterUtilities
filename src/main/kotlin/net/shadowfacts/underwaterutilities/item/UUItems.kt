@@ -1,6 +1,5 @@
 package net.shadowfacts.underwaterutilities.item
 
-import net.shadowfacts.shadowmc.item.ItemBase
 import net.shadowfacts.shadowmc.item.ModItems
 import net.shadowfacts.underwaterutilities.item.scuba.ItemBreather
 import net.shadowfacts.underwaterutilities.item.scuba.ItemTank

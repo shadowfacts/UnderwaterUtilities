@@ -23,7 +23,7 @@ class ItemBreather : ItemArmor(UUMaterials.SCUBA, 0, EntityEquipmentSlot.HEAD), 
 
 	init {
 		setRegistryName("scubaBreather")
-		unlocalizedName = "scubaBreather"
+		unlocalizedName = registryName.toString()
 	}
 
 	override fun initItemModel() {

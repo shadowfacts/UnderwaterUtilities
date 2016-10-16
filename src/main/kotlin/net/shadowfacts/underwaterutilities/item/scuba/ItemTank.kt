@@ -26,7 +26,7 @@ class ItemTank : ItemArmor(UUMaterials.SCUBA, 0, EntityEquipmentSlot.CHEST), Ite
 
 	init {
 		setRegistryName("scubaTank")
-		unlocalizedName = "scubaTank"
+		unlocalizedName = registryName.toString()
 	}
 
 	override fun getArmorModel(entityLiving: EntityLivingBase, stack: ItemStack, armorSlot: EntityEquipmentSlot, _default: ModelBiped): ModelBiped {
