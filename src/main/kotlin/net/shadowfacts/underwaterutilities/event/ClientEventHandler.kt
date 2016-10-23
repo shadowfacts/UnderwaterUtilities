@@ -4,9 +4,6 @@ import net.minecraft.block.material.Material
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.ScaledResolution
 import net.minecraft.client.renderer.GlStateManager
-import net.minecraft.client.renderer.Tessellator
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats
-import net.minecraft.util.EnumFacing
 import net.minecraft.util.ResourceLocation
 import net.minecraft.util.math.MathHelper
 import net.minecraftforge.client.GuiIngameForge
@@ -16,11 +13,14 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 import net.shadowfacts.shadowmc.oxygen.OxygenCaps
 import net.shadowfacts.underwaterutilities.MOD_ID
 import net.shadowfacts.underwaterutilities.UUCapabilities
+import net.shadowfacts.underwaterutilities.util.drawTexturedModalRect
 
 /**
  * @author shadowfacts
  */
 object ClientEventHandler {
+
+	private val HUD_TEXTURE = ResourceLocation(MOD_ID, "textures/gui/hud.png")
 
 	@SubscribeEvent
 	fun onRenderWaterOverlay(event: RenderBlockOverlayEvent) {
@@ -57,7 +57,7 @@ object ClientEventHandler {
 					val partial = MathHelper.ceiling_double_int(handler.stored.toDouble() * 10.0 / handler.capacity.toDouble()) - full
 
 					for (i in 0..full + partial - 1) {
-						bindTexture(TEXTURE)
+						Minecraft.getMinecraft().textureManager.bindTexture(HUD_TEXTURE)
 						drawTexturedModalRect(left - i * 8 - 9, top, 0.0, if (i < full) 0 else 9, 0, 9, 9)
 					}
 					GuiIngameForge.right_height += 10
@@ -69,25 +69,6 @@ object ClientEventHandler {
 			}
 
 		}
-	}
-
-	private val TEXTURE = ResourceLocation(MOD_ID, "textures/gui/hud.png")
-
-	private fun bindTexture(res: ResourceLocation) {
-		Minecraft.getMinecraft().textureManager.bindTexture(res)
-	}
-
-	private fun drawTexturedModalRect(x: Int, y: Int, zLevel: Double, textureX: Int, textureY: Int, width: Int, height: Int) {
-		val f = 0.00390625f
-		val f1 = 0.00390625f
-		val tessellator = Tessellator.getInstance()
-		val vertexbuffer = tessellator.buffer
-		vertexbuffer.begin(7, DefaultVertexFormats.POSITION_TEX)
-		vertexbuffer.pos((x + 0).toDouble(), (y + height).toDouble(), zLevel).tex(((textureX + 0).toFloat() * f).toDouble(), ((textureY + height).toFloat() * f1).toDouble()).endVertex()
-		vertexbuffer.pos((x + width).toDouble(), (y + height).toDouble(), zLevel).tex(((textureX + width).toFloat() * f).toDouble(), ((textureY + height).toFloat() * f1).toDouble()).endVertex()
-		vertexbuffer.pos((x + width).toDouble(), (y + 0).toDouble(), zLevel).tex(((textureX + width).toFloat() * f).toDouble(), ((textureY + 0).toFloat() * f1).toDouble()).endVertex()
-		vertexbuffer.pos((x + 0).toDouble(), (y + 0).toDouble(), zLevel).tex(((textureX + 0).toFloat() * f).toDouble(), ((textureY + 0).toFloat() * f1).toDouble()).endVertex()
-		tessellator.draw()
 	}
 
 }
