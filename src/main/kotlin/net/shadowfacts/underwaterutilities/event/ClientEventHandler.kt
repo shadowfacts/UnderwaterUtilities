@@ -93,16 +93,18 @@ object ClientEventHandler {
 	@SubscribeEvent
 	fun onRenderTick(event: TickEvent.RenderTickEvent) {
 		val player = Minecraft.getMinecraft().thePlayer
-		val helmet = player.inventory.armorItemInSlot(3)
-		if (Minecraft.getMinecraft().theWorld.getBlockState(player.position.up()).material == Material.WATER &&
-			helmet != null && helmet.hasCapability(UUCapabilities.BREATHING_AID, null) &&
-			helmet.getCapability(UUCapabilities.BREATHING_AID, null).canBreathe(player)) {
-			
-			if (event.phase == TickEvent.Phase.START) {
-				gamma = Minecraft.getMinecraft().gameSettings.gammaSetting
-				Minecraft.getMinecraft().gameSettings.gammaSetting = 2.5f
-			} else {
-				Minecraft.getMinecraft().gameSettings.gammaSetting = gamma
+		if (player != null) {
+			val helmet = player.inventory.armorItemInSlot(3)
+			if (Minecraft.getMinecraft().theWorld.getBlockState(player.position.up()).material == Material.WATER &&
+					helmet != null && helmet.hasCapability(UUCapabilities.BREATHING_AID, null) &&
+					helmet.getCapability(UUCapabilities.BREATHING_AID, null).canBreathe(player)) {
+
+				if (event.phase == TickEvent.Phase.START) {
+					gamma = Minecraft.getMinecraft().gameSettings.gammaSetting
+					Minecraft.getMinecraft().gameSettings.gammaSetting = 2.5f
+				} else {
+					Minecraft.getMinecraft().gameSettings.gammaSetting = gamma
+				}
 			}
 		}
 	}
