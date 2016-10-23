@@ -10,11 +10,15 @@ import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.util.EnumFacing
 import net.minecraft.world.World
 import net.minecraftforge.client.model.ModelLoader
+import net.minecraftforge.common.capabilities.Capability
 import net.minecraftforge.common.capabilities.ICapabilityProvider
 import net.shadowfacts.shadowmc.item.ItemModelProvider
 import net.shadowfacts.shadowmc.oxygen.OxygenCaps
 import net.shadowfacts.underwaterutilities.MOD_ID
+import net.shadowfacts.underwaterutilities.UUCapabilities
 import net.shadowfacts.underwaterutilities.UUMaterials
+import net.shadowfacts.underwaterutilities.api.item.BreathingAid
+import net.shadowfacts.underwaterutilities.api.item.Goggles
 import net.shadowfacts.underwaterutilities.item.ItemGoggles
 
 /**
@@ -32,21 +36,46 @@ class ItemBreather : ItemArmor(UUMaterials.SCUBA, 0, EntityEquipmentSlot.HEAD), 
 		ModelLoader.setCustomModelResourceLocation(this, 0, ModelResourceLocation("$MOD_ID:scubaBreather", "inventory"))
 	}
 
-	override fun onArmorTick(world: World, player: EntityPlayer, stack: ItemStack?) {
-		if (!player.capabilities.isCreativeMode && player.isInWater && player.air < 300) {
-			val chestpiece = player.inventory.armorItemInSlot(2)
-			if (chestpiece != null && chestpiece.hasCapability(OxygenCaps.PROVIDER, EnumFacing.NORTH)) {
-				val provider = chestpiece.getCapability(OxygenCaps.PROVIDER, EnumFacing.NORTH)
-				if (provider.stored > 0) {
-					val amount = provider.extract((300 - player.air).toFloat(), false)
-					player.air = player.air + amount.toInt()
-				}
-			}
-		}
+	override fun initCapabilities(stack: ItemStack, nbt: NBTTagCompound?): ICapabilityProvider? {
+		return BreatherCapProvider()
 	}
 
-	override fun initCapabilities(stack: ItemStack?, nbt: NBTTagCompound?): ICapabilityProvider? {
-		return ItemGoggles.GogglesCapProvider()
+	class BreatherCapProvider() : ICapabilityProvider {
+
+		private val goggles = Goggles()
+		private val breathingAid = object : BreathingAid() {
+			override fun canBreathe(player: EntityPlayer): Boolean {
+				if (!player.capabilities.isCreativeMode && player.isInWater && player.air < 300) {
+					val chestpiece = player.inventory.armorItemInSlot(2)
+					if (chestpiece != null && chestpiece.hasCapability(OxygenCaps.PROVIDER, null)) {
+						val provider = chestpiece.getCapability(OxygenCaps.PROVIDER, null)
+						return provider.stored > 0
+					}
+				}
+				return false
+			}
+
+			override fun breathe(player: EntityPlayer) {
+				val chestpiece = player.inventory.armorItemInSlot(2)
+				val provider = chestpiece.getCapability(OxygenCaps.PROVIDER, null)
+				val amount = provider.extract((300 - player.air).toFloat(), false)
+				player.air += amount.toInt()
+			}
+		}
+
+		override fun hasCapability(capability: Capability<*>, facing: EnumFacing?): Boolean {
+			return capability == UUCapabilities.GOGGLES || capability == UUCapabilities.BREATHING_AID
+		}
+
+		override fun <T : Any?> getCapability(capability: Capability<T>, facing: EnumFacing?): T? {
+			if (capability == UUCapabilities.GOGGLES) {
+				return goggles as T
+			} else if (capability == UUCapabilities.BREATHING_AID) {
+				return breathingAid as T
+			}
+			return null
+		}
+
 	}
 
 }
