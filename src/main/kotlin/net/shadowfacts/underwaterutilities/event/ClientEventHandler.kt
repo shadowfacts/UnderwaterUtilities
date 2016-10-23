@@ -4,15 +4,19 @@ import net.minecraft.block.material.Material
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.ScaledResolution
 import net.minecraft.client.renderer.GlStateManager
+import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.util.ResourceLocation
 import net.minecraft.util.math.MathHelper
 import net.minecraftforge.client.GuiIngameForge
+import net.minecraftforge.client.event.EntityViewRenderEvent
 import net.minecraftforge.client.event.RenderBlockOverlayEvent
 import net.minecraftforge.client.event.RenderGameOverlayEvent
+import net.minecraftforge.client.event.RenderWorldLastEvent
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 import net.shadowfacts.shadowmc.oxygen.OxygenCaps
 import net.shadowfacts.underwaterutilities.MOD_ID
 import net.shadowfacts.underwaterutilities.UUCapabilities
+import net.shadowfacts.underwaterutilities.item.UUItems
 import net.shadowfacts.underwaterutilities.util.drawTexturedModalRect
 
 /**
@@ -21,6 +25,7 @@ import net.shadowfacts.underwaterutilities.util.drawTexturedModalRect
 object ClientEventHandler {
 
 	private val HUD_TEXTURE = ResourceLocation(MOD_ID, "textures/gui/hud.png")
+	private var originalGamma: Float? = null
 
 	@SubscribeEvent
 	fun onRenderWaterOverlay(event: RenderBlockOverlayEvent) {
@@ -68,6 +73,32 @@ object ClientEventHandler {
 
 			}
 
+		}
+	}
+
+	@SubscribeEvent
+	fun onRenderFog(event: EntityViewRenderEvent.FogDensity) {
+		val player = event.entity
+		if (player is EntityPlayer) {
+			if (event.state.material == Material.WATER) {
+				val helmet = player.inventory.armorItemInSlot(3)
+				if (helmet != null && helmet.item == UUItems.breather) {
+					event.density = 0f
+					event.isCanceled = true
+				}
+			}
+		}
+	}
+
+	@SubscribeEvent
+	fun onClientTick(event: RenderWorldLastEvent) {
+		if (originalGamma == null) {
+			originalGamma = Minecraft.getMinecraft().gameSettings.gammaSetting
+		}
+		if (Minecraft.getMinecraft().theWorld.getBlockState(Minecraft.getMinecraft().thePlayer.position.up()).material == Material.WATER) {
+			Minecraft.getMinecraft().gameSettings.gammaSetting = 2.5f
+		} else {
+			Minecraft.getMinecraft().gameSettings.gammaSetting = originalGamma!!
 		}
 	}
 
