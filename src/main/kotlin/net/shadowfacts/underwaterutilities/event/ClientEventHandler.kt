@@ -11,8 +11,8 @@ import net.minecraftforge.client.GuiIngameForge
 import net.minecraftforge.client.event.EntityViewRenderEvent
 import net.minecraftforge.client.event.RenderBlockOverlayEvent
 import net.minecraftforge.client.event.RenderGameOverlayEvent
-import net.minecraftforge.client.event.RenderWorldLastEvent
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
+import net.minecraftforge.fml.common.gameevent.TickEvent
 import net.shadowfacts.shadowmc.oxygen.OxygenCaps
 import net.shadowfacts.underwaterutilities.MOD_ID
 import net.shadowfacts.underwaterutilities.UUCapabilities
@@ -25,7 +25,7 @@ import net.shadowfacts.underwaterutilities.util.drawTexturedModalRect
 object ClientEventHandler {
 
 	private val HUD_TEXTURE = ResourceLocation(MOD_ID, "textures/gui/hud.png")
-	private var originalGamma: Float? = null
+	private var gamma = 0f
 
 	@SubscribeEvent
 	fun onRenderWaterOverlay(event: RenderBlockOverlayEvent) {
@@ -91,14 +91,19 @@ object ClientEventHandler {
 	}
 
 	@SubscribeEvent
-	fun onClientTick(event: RenderWorldLastEvent) {
-		if (originalGamma == null) {
-			originalGamma = Minecraft.getMinecraft().gameSettings.gammaSetting
-		}
-		if (Minecraft.getMinecraft().theWorld.getBlockState(Minecraft.getMinecraft().thePlayer.position.up()).material == Material.WATER) {
-			Minecraft.getMinecraft().gameSettings.gammaSetting = 2.5f
-		} else {
-			Minecraft.getMinecraft().gameSettings.gammaSetting = originalGamma!!
+	fun onRenderTick(event: TickEvent.RenderTickEvent) {
+		val player = Minecraft.getMinecraft().thePlayer
+		val helmet = player.inventory.armorItemInSlot(3)
+		if (Minecraft.getMinecraft().theWorld.getBlockState(player.position.up()).material == Material.WATER &&
+			helmet != null && helmet.hasCapability(UUCapabilities.BREATHING_AID, null) &&
+			helmet.getCapability(UUCapabilities.BREATHING_AID, null).canBreathe(player)) {
+			
+			if (event.phase == TickEvent.Phase.START) {
+				gamma = Minecraft.getMinecraft().gameSettings.gammaSetting
+				Minecraft.getMinecraft().gameSettings.gammaSetting = 2.5f
+			} else {
+				Minecraft.getMinecraft().gameSettings.gammaSetting = gamma
+			}
 		}
 	}
 
