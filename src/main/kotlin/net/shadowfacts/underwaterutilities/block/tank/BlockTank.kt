@@ -1,5 +1,6 @@
 package net.shadowfacts.underwaterutilities.block.tank
 
+import net.minecraft.block.SoundType
 import net.minecraft.block.material.Material
 
 import net.minecraft.block.properties.PropertyInteger
@@ -42,6 +43,8 @@ class BlockTank : BlockTE<TileEntityTank>(Material.ROCK, "oxygenTank") {
 		defaultState = defaultState.withProperty(LEVEL, 0)
 		unlocalizedName = registryName.toString()
 		setCreativeTab(CreativeTabs.MISC)
+		setHardness(2f)
+		soundType = SoundType.STONE
 	}
 
 	override fun initItemModel() {

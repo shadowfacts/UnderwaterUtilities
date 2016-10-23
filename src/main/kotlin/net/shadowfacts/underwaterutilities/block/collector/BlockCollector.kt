@@ -1,5 +1,6 @@
 package net.shadowfacts.underwaterutilities.block.collector
 
+import net.minecraft.block.SoundType
 import net.minecraft.block.material.Material
 import net.minecraft.block.properties.PropertyDirection
 import net.minecraft.block.state.BlockStateContainer
@@ -24,6 +25,8 @@ class BlockCollector : BlockTE<TileEntityCollector>(Material.ROCK, "oxygenCollec
 		defaultState = defaultState.withProperty(FACING, EnumFacing.NORTH)
 		unlocalizedName = registryName.toString()
 		setCreativeTab(CreativeTabs.MISC)
+		setHardness(2f)
+		soundType = SoundType.STONE
 	}
 
 	override fun createBlockState(): BlockStateContainer {
