@@ -9,13 +9,14 @@ import net.shadowfacts.underwaterutilities.item.scuba.ItemTank
  */
 object UUItems : ModItems() {
 
-	var goggles: ItemGoggles = ItemGoggles()
-	var goggleLens: ItemBase = ItemBase("goggleLens")
-	var breather: ItemBreather = ItemBreather()
-	var tank: ItemTank = ItemTank()
-	var blade: ItemBase = ItemBase("blade")
-	var fan: ItemBase = ItemBase("fan")
-	var snorkel: ItemSnorkel = ItemSnorkel()
+	val goggles = ItemGoggles()
+	val goggleLens = ItemBase("goggleLens")
+	val breather = ItemBreather()
+	val tank = ItemTank()
+	val blade = ItemBase("blade")
+	val fan = ItemBase("fan")
+	val snorkelTube = ItemBase("snorkelTube")
+	val snorkel = ItemSnorkel()
 
 	override fun init() {
 		register(goggles)
@@ -24,6 +25,7 @@ object UUItems : ModItems() {
 		register(tank)
 		register(blade)
 		register(fan)
+		register(snorkelTube)
 		register(snorkel)
 	}
 

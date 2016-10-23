@@ -1,5 +1,6 @@
 package net.shadowfacts.underwaterutilities.recipe
 
+import net.minecraft.item.ItemStack
 import net.minecraftforge.fml.common.registry.GameRegistry
 import net.minecraftforge.oredict.ShapedOreRecipe
 
@@ -21,7 +22,8 @@ object ModRecipes {
 
 		GameRegistry.addRecipe(ShapedOreRecipe(blocks.tank, " i ", "I I", "I I", 'i', "nuggetIron", 'I', "ingotIron"))
 
-		GameRegistry.addRecipe(ShapedOreRecipe(items.snorkel, " ls", "lsl", " l ", 'l', "leather", 's', "sugarcane"))
+		GameRegistry.addRecipe(ShapedOreRecipe(items.snorkelTube, " ls", "lsl", " l ", 'l', "leather", 's', "sugarcane"))
+		GameRegistry.addShapelessRecipe(ItemStack(items.snorkel), items.snorkelTube, items.goggles)
 
 		GameRegistry.addRecipe(ShapedOreRecipe(items.breather, " g ", "lll", 'g', items.goggles, 'l', "leather"))
 		GameRegistry.addRecipe(ShapedOreRecipe(items.tank, "iSi", "I I", 'i', "nuggetIron", 'I', "ingotIron", 'S', "slimeball"))
