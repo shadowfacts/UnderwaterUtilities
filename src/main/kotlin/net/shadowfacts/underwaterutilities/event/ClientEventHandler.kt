@@ -41,8 +41,10 @@ object ClientEventHandler {
 
 			if (player.isInsideOfMaterial(Material.WATER)) {
 
-				val stack = player.inventory.armorItemInSlot(2)
-				if (stack != null && stack.hasCapability(OxygenCaps.HANDLER, EnumFacing.NORTH)) {
+				val chestpiece = player.inventory.armorItemInSlot(2)
+				val helmet = player.inventory.armorItemInSlot(3)
+				if (chestpiece != null && chestpiece.hasCapability(OxygenCaps.HANDLER, null) &&
+					helmet != null && helmet.hasCapability(UUCapabilities.BREATHING_AID, null)) {
 					event.isCanceled = true
 
 					GlStateManager.enableBlend()
@@ -50,7 +52,7 @@ object ClientEventHandler {
 					val left = res.scaledWidth / 2 + 91
 					val top = res.scaledHeight - GuiIngameForge.right_height
 
-					val handler = stack.getCapability(OxygenCaps.HANDLER, EnumFacing.NORTH)
+					val handler = chestpiece.getCapability(OxygenCaps.HANDLER, null)
 					val full = MathHelper.ceiling_double_int((handler.stored - 2).toDouble() * 10.0 / handler.capacity.toDouble())
 					val partial = MathHelper.ceiling_double_int(handler.stored.toDouble() * 10.0 / handler.capacity.toDouble()) - full
 
