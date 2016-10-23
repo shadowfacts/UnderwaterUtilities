@@ -27,4 +27,15 @@ object EventHandler {
 		}
 	}
 
+	@SubscribeEvent
+	fun onBreakSpeed(event: PlayerEvent.BreakSpeed) {
+		val player = event.entityPlayer
+		if (player.isInsideOfMaterial(Material.WATER) && !EnchantmentHelper.getAquaAffinityModifier(player)) {
+			val helmet = player.inventory.armorItemInSlot(3)
+			if (helmet != null && helmet.hasCapability(UUCapabilities.BREATHING_AID, null)) {
+				event.newSpeed = event.originalSpeed * 5
+			}
+		}
+	}
+
 }
