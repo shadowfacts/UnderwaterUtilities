@@ -17,6 +17,7 @@ object UUItems : ModItems() {
 	val fan = ItemBase("fan")
 	val snorkelTube = ItemBase("snorkelTube")
 	val snorkel = ItemSnorkel()
+	val flippers = ItemFlippers()
 
 	override fun init() {
 		register(goggles)
@@ -27,6 +28,7 @@ object UUItems : ModItems() {
 		register(fan)
 		register(snorkelTube)
 		register(snorkel)
+		register(flippers)
 	}
 
 }

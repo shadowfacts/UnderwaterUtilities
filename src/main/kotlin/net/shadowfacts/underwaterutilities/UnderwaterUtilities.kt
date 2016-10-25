@@ -11,6 +11,7 @@ import net.minecraftforge.fml.relauncher.SideOnly
 import net.shadowfacts.shadowmc.capability.Storage
 import net.shadowfacts.underwaterutilities.api.item.BreathingAid
 import net.shadowfacts.underwaterutilities.api.item.Goggles
+import net.shadowfacts.underwaterutilities.api.item.SwimmingAid
 import net.shadowfacts.underwaterutilities.block.UUBlocks
 import net.shadowfacts.underwaterutilities.event.ClientEventHandler
 import net.shadowfacts.underwaterutilities.event.EventHandler
@@ -55,8 +56,9 @@ object UnderwaterUtilities {
 	}
 
 	private fun registerCapabilities() {
-		CapabilityManager.INSTANCE.register(Goggles::class.java, Storage<Goggles>(), Goggles::class.java)
-		CapabilityManager.INSTANCE.register(BreathingAid::class.java, Storage<BreathingAid>(), BreathingAid::class.java)
+		CapabilityManager.INSTANCE.register(Goggles::class.java, Storage(), Goggles::class.java)
+		CapabilityManager.INSTANCE.register(BreathingAid::class.java, Storage(), BreathingAid::class.java)
+		CapabilityManager.INSTANCE.register(SwimmingAid::class.java, Storage(), SwimmingAid::class.java)
 	}
 
 }

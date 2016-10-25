@@ -4,6 +4,7 @@ import net.minecraftforge.common.capabilities.Capability
 import net.minecraftforge.common.capabilities.CapabilityInject
 import net.shadowfacts.underwaterutilities.api.item.BreathingAid
 import net.shadowfacts.underwaterutilities.api.item.Goggles
+import net.shadowfacts.underwaterutilities.api.item.SwimmingAid
 
 /**
  * @author shadowfacts
@@ -16,5 +17,8 @@ object UUCapabilities {
 
 	@CapabilityInject(BreathingAid::class)
 	var BREATHING_AID: Capability<BreathingAid>? = null
+
+	@CapabilityInject(SwimmingAid::class)
+	var SWIMMING_AID: Capability<SwimmingAid>? = null
 
 }
