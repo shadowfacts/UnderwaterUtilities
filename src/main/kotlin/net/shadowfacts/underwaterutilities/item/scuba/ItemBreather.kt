@@ -27,13 +27,13 @@ import net.shadowfacts.underwaterutilities.item.ItemGoggles
 class ItemBreather : ItemArmor(UUMaterials.SCUBA, 0, EntityEquipmentSlot.HEAD), ItemModelProvider {
 
 	init {
-		setRegistryName("scubaBreather")
+		setRegistryName("scuba_breather")
 		unlocalizedName = registryName.toString()
 		creativeTab = CreativeTabs.MISC
 	}
 
 	override fun initItemModel() {
-		ModelLoader.setCustomModelResourceLocation(this, 0, ModelResourceLocation("$MOD_ID:scubaBreather", "inventory"))
+		ModelLoader.setCustomModelResourceLocation(this, 0, ModelResourceLocation("$MOD_ID:scuba_breather", "inventory"))
 	}
 
 	override fun initCapabilities(stack: ItemStack, nbt: NBTTagCompound?): ICapabilityProvider? {
@@ -47,8 +47,8 @@ class ItemBreather : ItemArmor(UUMaterials.SCUBA, 0, EntityEquipmentSlot.HEAD), 
 			override fun canBreathe(player: EntityPlayer): Boolean {
 				if (!player.capabilities.isCreativeMode && player.isInWater && player.air < 300) {
 					val chestpiece = player.inventory.armorItemInSlot(2)
-					if (chestpiece != null && chestpiece.hasCapability(OxygenCaps.PROVIDER, null)) {
-						val provider = chestpiece.getCapability(OxygenCaps.PROVIDER, null)
+					if (!chestpiece.isEmpty && chestpiece.hasCapability(OxygenCaps.PROVIDER, null)) {
+						val provider = chestpiece.getCapability(OxygenCaps.PROVIDER, null)!!
 						return provider.stored > 0
 					}
 				}
@@ -57,7 +57,7 @@ class ItemBreather : ItemArmor(UUMaterials.SCUBA, 0, EntityEquipmentSlot.HEAD), 
 
 			override fun breathe(player: EntityPlayer) {
 				val chestpiece = player.inventory.armorItemInSlot(2)
-				val provider = chestpiece.getCapability(OxygenCaps.PROVIDER, null)
+				val provider = chestpiece.getCapability(OxygenCaps.PROVIDER, null)!!
 				val amount = provider.extract((300 - player.air).toFloat(), false)
 				player.air += amount.toInt()
 			}

@@ -10,12 +10,12 @@ import net.shadowfacts.underwaterutilities.item.scuba.ItemTank
 object UUItems : ModItems() {
 
 	val goggles = ItemGoggles()
-	val goggleLens = ItemBase("goggleLens")
+	val goggleLens = ItemBase("goggle_lens")
 	val breather = ItemBreather()
 	val tank = ItemTank()
 	val blade = ItemBase("blade")
 	val fan = ItemBase("fan")
-	val snorkelTube = ItemBase("snorkelTube")
+	val snorkelTube = ItemBase("snorkel_tube")
 	val snorkel = ItemSnorkel()
 
 	override fun init() {

@@ -8,6 +8,7 @@ import net.minecraft.block.state.IBlockState
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.util.EnumFacing
+import net.minecraft.util.EnumHand
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 import net.shadowfacts.shadowmc.block.BlockTE
@@ -15,7 +16,7 @@ import net.shadowfacts.shadowmc.block.BlockTE
 /**
  * @author shadowfacts
  */
-class BlockCollector : BlockTE<TileEntityCollector>(Material.ROCK, "oxygenCollector") {
+class BlockCollector : BlockTE<TileEntityCollector>(Material.ROCK, "oxygen_collector") {
 
 	companion object {
 		val FACING: PropertyDirection = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL)
@@ -33,7 +34,7 @@ class BlockCollector : BlockTE<TileEntityCollector>(Material.ROCK, "oxygenCollec
 		return BlockStateContainer(this, FACING)
 	}
 
-	override fun onBlockPlaced(world: World, pos: BlockPos, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float, meta: Int, placer: EntityLivingBase): IBlockState {
+	override fun getStateForPlacement(world: World, pos: BlockPos, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float, meta: Int, placer: EntityLivingBase, hand: EnumHand): IBlockState {
 		return defaultState.withProperty(FACING, getDirection(pos, placer))
 	}
 

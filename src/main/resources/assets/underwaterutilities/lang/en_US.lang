@@ -1,10 +1,11 @@
 item.underwaterutilities:goggles.name=Goggles
-item.underwaterutilities:goggleLens.name=Goggle Lens
-item.underwaterutilities:scubaBreather.name=SCUBA Breather
-item.underwaterutilities:scubaTank.name=SCUBA Tank
+item.underwaterutilities:goggle_lens.name=Goggle Lens
+item.underwaterutilities:scuba_breather.name=SCUBA Breather
+item.underwaterutilities:scuba_tank.name=SCUBA Tank
 item.underwaterutilities:snorkel.name=Snorkel
+item.underwaterutilities:snorkel_tube.name=Snorkel Tube
 item.underwaterutilities:blade.name=Blade
 item.underwaterutilities:fan.name=Fan
 
-tile.underwaterutilities:oxygenCollector.name=Oxygen Collector
-tile.underwaterutilities:oxygenTank.name=Oxygen Tank
+tile.underwaterutilities:oxygen_collector.name=Oxygen Collector
+tile.underwaterutilities:oxygen_tank.name=Oxygen Tank

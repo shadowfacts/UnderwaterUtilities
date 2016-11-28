@@ -31,7 +31,7 @@ import java.util.ArrayList
 /**
  * @author shadowfacts
  */
-class BlockTank : BlockTE<TileEntityTank>(Material.ROCK, "oxygenTank") {
+class BlockTank : BlockTE<TileEntityTank>(Material.ROCK, "oxygen_tank") {
 
 	companion object {
 		val LEVEL: PropertyInteger = PropertyInteger.create("level", 0, 10)
@@ -49,9 +49,9 @@ class BlockTank : BlockTE<TileEntityTank>(Material.ROCK, "oxygenTank") {
 
 	override fun initItemModel() {
 		ModelLoader.setCustomMeshDefinition(Item.getItemFromBlock(this)!!, MeshWrapper.of { stack ->
-			val handler = stack.getCapability(OxygenCaps.HANDLER, null)
+			val handler = stack.getCapability(OxygenCaps.HANDLER, null)!!
 			val level = (handler.stored / handler.capacity.toFloat() * 10).toInt()
-			ModelResourceLocation("$MOD_ID:oxygenTank", "level=" + level)
+			ModelResourceLocation("$MOD_ID:oxygen_tank", "level=" + level)
 		})
 	}
 
@@ -60,8 +60,7 @@ class BlockTank : BlockTE<TileEntityTank>(Material.ROCK, "oxygenTank") {
 		return BOX
 	}
 
-	@Deprecated("")
-	override fun getCollisionBoundingBox(blockState: IBlockState, world: World, pos: BlockPos): AxisAlignedBB? {
+	override fun getCollisionBoundingBox(blockState: IBlockState, world: IBlockAccess, pos: BlockPos): AxisAlignedBB? {
 		return BOX
 	}
 
@@ -84,18 +83,19 @@ class BlockTank : BlockTE<TileEntityTank>(Material.ROCK, "oxygenTank") {
 		return false
 	}
 
-	override fun getStateForPlacement(world: World, pos: BlockPos, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float, meta: Int, placer: EntityLivingBase, stack: ItemStack): IBlockState {
-		val handler = stack.getCapability(OxygenCaps.HANDLER, null)
+	override fun getStateForPlacement(world: World, pos: BlockPos, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float, meta: Int, placer: EntityLivingBase, hand: EnumHand): IBlockState {
+		val stack = placer.getHeldItem(hand)
+		val handler = stack.getCapability(OxygenCaps.HANDLER, null)!!
 		val level = (handler.stored / handler.capacity * 10).toInt()
 		return defaultState.withProperty(LEVEL, level)
 	}
 
 	override fun onBlockPlacedBy(world: World, pos: BlockPos, state: IBlockState, placer: EntityLivingBase, stack: ItemStack) {
 		val tank = getTileEntity(world, pos)
-		tank.loadOxygen(stack.getCapability(OxygenCaps.HANDLER, null))
+		tank.loadOxygen(stack.getCapability(OxygenCaps.HANDLER, null)!!)
 	}
 
-	override fun onBlockActivated(world: World, pos: BlockPos, state: IBlockState, player: EntityPlayer, hand: EnumHand, heldItem: ItemStack?, side: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
+	override fun onBlockActivated(world: World, pos: BlockPos, state: IBlockState, player: EntityPlayer, hand: EnumHand, side: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
 		player.openGui(UnderwaterUtilities, UUGUIHandler.TANK, world, pos.x, pos.y, pos.z)
 		return true
 	}
@@ -120,7 +120,7 @@ class BlockTank : BlockTE<TileEntityTank>(Material.ROCK, "oxygenTank") {
 		(stack.getCapability(OxygenCaps.HANDLER, EnumFacing.NORTH) as OxygenHandlerImpl).load(getTileEntity(world, pos).getCapability(OxygenCaps.HANDLER, EnumFacing.NORTH))
 
 		val item = EntityItem(world, pos.x.toDouble(), pos.y.toDouble(), pos.z.toDouble(), stack)
-		world.spawnEntityInWorld(item)
+		world.spawnEntity(item)
 
 		super.breakBlock(world, pos, state)
 	}

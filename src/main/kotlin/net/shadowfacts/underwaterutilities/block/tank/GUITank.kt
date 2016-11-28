@@ -8,9 +8,7 @@ import net.minecraft.util.math.BlockPos
 import net.shadowfacts.shadowmc.ShadowMC
 import net.shadowfacts.shadowmc.network.PacketRequestTEUpdate
 import net.shadowfacts.shadowmc.oxygen.OxygenCaps
-import net.shadowfacts.shadowmc.ui.element.button.UIImage
-import net.shadowfacts.shadowmc.ui.element.view.UIFixedView
-import net.shadowfacts.shadowmc.ui.util.UIBuilder
+import net.shadowfacts.shadowmc.ui.dsl.*
 import net.shadowfacts.underwaterutilities.MOD_ID
 import net.shadowfacts.underwaterutilities.gui.element.UITexturedOxygenIndicator
 
@@ -22,30 +20,39 @@ object GUITank {
 	private val BG = ResourceLocation(MOD_ID, "textures/gui/tank.png")
 
 	fun create(pos: BlockPos, playerInv: InventoryPlayer, tank: TileEntityTank): GuiContainer {
-		val root = UIFixedView(176, 166, "root")
+		return container(ContainerTank(pos, playerInv, tank)) {
+			fixed {
+				id = "root"
+				width = 176
+				height = 166
 
-		val bg = UIImage(BG, 176, 166, "bg")
-		root.add(bg)
+				image {
+					id = "bg"
+					width = 176
+					height = 166
+					texture = BG
+				}
 
-		val top = UIFixedView(176, 166 / 2, "top")
+				fixed {
+					id = "top"
+					width = 176
+					height = 166 / 2
 
-		val oxygenIndicator = UITexturedOxygenIndicator(tank.getCapability(OxygenCaps.HANDLER, EnumFacing.NORTH), "oxygen")
-		top.add(oxygenIndicator)
+					add(UITexturedOxygenIndicator(tank.getCapability(OxygenCaps.HANDLER, EnumFacing.NORTH)!!, "oxygen"))
+				}
+			}
 
-		root.add(top)
-
-		val updateHandler = object : Runnable {
-			private var ticks = 0
-			override fun run() {
+			var ticks = 0
+			updateHandler {
 				ticks++
 				if (ticks % 20 == 0) {
 					ticks = 0
 					ShadowMC.network.sendToServer(PacketRequestTEUpdate(tank))
 				}
 			}
-		}
 
-		return UIBuilder().add(root).setUpdateHandler(updateHandler).style("$MOD_ID:tank").createContainer(ContainerTank(pos, playerInv, tank))
+			style("$MOD_ID:tank")
+		}
 	}
 
 }

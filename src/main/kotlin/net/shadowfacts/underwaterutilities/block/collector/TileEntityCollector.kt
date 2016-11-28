@@ -26,13 +26,13 @@ class TileEntityCollector : BaseTileEntity(), ITickable, RFAdapter {
 	private val fuAdapter = FUAdapter(tesla)
 
 	override fun update() {
-		if (!worldObj.isRemote) {
+		if (!world.isRemote) {
 			if (tesla.storedPower >= 5) {
 				for (facing in EnumFacing.VALUES) {
-					if (facing != worldObj.getBlockState(pos).getValue(BlockCollector.FACING)) {
-						val te = worldObj.getTileEntity(pos.offset(facing))
+					if (facing != world.getBlockState(pos).getValue(BlockCollector.FACING)) {
+						val te = world.getTileEntity(pos.offset(facing))
 						if (te != null && te.hasCapability(OxygenCaps.RECEIVER, facing.opposite)) {
-							val receiver = te.getCapability(OxygenCaps.RECEIVER, facing.opposite)
+							val receiver = te.getCapability(OxygenCaps.RECEIVER, facing.opposite)!!
 							if (receiver.stored < receiver.capacity) {
 								receiver.receive(1f, false)
 								tesla.takePower(5, false)

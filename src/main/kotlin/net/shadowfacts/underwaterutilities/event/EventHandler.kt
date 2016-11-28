@@ -18,8 +18,8 @@ object EventHandler {
 		if (event.entity is EntityPlayer) {
 			val player = event.entity as EntityPlayer
 			val helmet = player.inventory.armorItemInSlot(3)
-			if (helmet != null && helmet.hasCapability(UUCapabilities.BREATHING_AID, null)) {
-				val aid = helmet.getCapability(UUCapabilities.BREATHING_AID, null)
+			if (!helmet.isEmpty && helmet.hasCapability(UUCapabilities.BREATHING_AID!!, null)) {
+				val aid = helmet.getCapability(UUCapabilities.BREATHING_AID!!, null)!!
 				if (aid.canBreathe(player)) {
 					aid.breathe(player)
 				}
@@ -32,8 +32,8 @@ object EventHandler {
 		val player = event.entityPlayer
 		if (player.isInsideOfMaterial(Material.WATER) && !EnchantmentHelper.getAquaAffinityModifier(player)) {
 			val helmet = player.inventory.armorItemInSlot(3)
-			if (helmet != null && helmet.hasCapability(UUCapabilities.BREATHING_AID, null) &&
-				helmet.getCapability(UUCapabilities.BREATHING_AID, null).canBreathe(player)) {
+			if (!helmet.isEmpty && helmet.hasCapability(UUCapabilities.BREATHING_AID!!, null) &&
+				helmet.getCapability(UUCapabilities.BREATHING_AID!!, null)!!.canBreathe(player)) {
 				event.newSpeed = event.originalSpeed * 5
 			}
 		}

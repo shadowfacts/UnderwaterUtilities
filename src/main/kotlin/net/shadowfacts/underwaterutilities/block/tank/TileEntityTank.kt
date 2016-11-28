@@ -43,12 +43,12 @@ class TileEntityTank : BaseTileEntity(), ITickable {
 		val newLevel = calcLevel()
 		if (level != newLevel) {
 			level = newLevel
-			worldObj.setBlockState(pos, UnderwaterUtilities.blocks.tank.getDefaultState().withProperty(BlockTank.LEVEL, level))
+			world.setBlockState(pos, UnderwaterUtilities.blocks.tank.getDefaultState().withProperty(BlockTank.LEVEL, level))
 		}
 	}
 
 	override fun update() {
-		if (!worldObj.isRemote) {
+		if (!world.isRemote) {
 			// receive
 			if (canReceiveOxygenFromItem()) {
 				receiveOxygenFromItem()
@@ -67,12 +67,12 @@ class TileEntityTank : BaseTileEntity(), ITickable {
 
 	private fun canReceiveOxygenFromItem(): Boolean {
 		val stack = inventory.getStackInSlot(0)
-		return stack != null && stack.hasCapability(OxygenCaps.PROVIDER, EnumFacing.NORTH)
+		return !stack.isEmpty && stack.hasCapability(OxygenCaps.PROVIDER, EnumFacing.NORTH)
 	}
 
 	private fun receiveOxygenFromItem() {
 		val stack = inventory.getStackInSlot(0)
-		val provider = stack.getCapability(OxygenCaps.PROVIDER, EnumFacing.NORTH)
+		val provider = stack.getCapability(OxygenCaps.PROVIDER, EnumFacing.NORTH)!!
 		if (provider.stored > 0) {
 			oxygen.receive(provider.extract(oxygen.receive(provider.stored, true), false), false)
 			oxygenChanged(oxygen)
@@ -81,12 +81,12 @@ class TileEntityTank : BaseTileEntity(), ITickable {
 
 	private fun canSendOxygenToItem(): Boolean {
 		val stack = inventory.getStackInSlot(1)
-		return stack != null && stack.hasCapability(OxygenCaps.RECEIVER, EnumFacing.NORTH)
+		return !stack.isEmpty && stack.hasCapability(OxygenCaps.RECEIVER, EnumFacing.NORTH)
 	}
 
 	private fun sendOxygenToItem() {
 		val stack = inventory.getStackInSlot(1)
-		val receiver = stack.getCapability(OxygenCaps.RECEIVER, EnumFacing.NORTH)
+		val receiver = stack.getCapability(OxygenCaps.RECEIVER, EnumFacing.NORTH)!!
 		if (receiver.stored < receiver.capacity) {
 			oxygen.extract(receiver.receive(oxygen.extract(oxygen.stored, true), false), false)
 			oxygenChanged(oxygen)

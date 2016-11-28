@@ -30,9 +30,9 @@ object ClientEventHandler {
 	@SubscribeEvent
 	fun onRenderWaterOverlay(event: RenderBlockOverlayEvent) {
 		if (event.overlayType == RenderBlockOverlayEvent.OverlayType.WATER) {
-			val player = Minecraft.getMinecraft().thePlayer
+			val player = Minecraft.getMinecraft().player
 			val helmet = player.inventory.armorItemInSlot(3)
-			if (helmet != null && helmet.hasCapability(UUCapabilities.GOGGLES!!, null)) {
+			if (!helmet.isEmpty && helmet.hasCapability(UUCapabilities.GOGGLES!!, null)) {
 				event.isCanceled = true
 			}
 		}
@@ -42,14 +42,14 @@ object ClientEventHandler {
 	fun onRenderAir(event: RenderGameOverlayEvent.Pre) {
 		if (event.type == RenderGameOverlayEvent.ElementType.AIR) {
 
-			val player = Minecraft.getMinecraft().thePlayer
+			val player = Minecraft.getMinecraft().player
 
 			if (player.isInsideOfMaterial(Material.WATER)) {
 
 				val chestpiece = player.inventory.armorItemInSlot(2)
 				val helmet = player.inventory.armorItemInSlot(3)
-				if (chestpiece != null && chestpiece.hasCapability(OxygenCaps.HANDLER, null) &&
-					helmet != null && helmet.hasCapability(UUCapabilities.BREATHING_AID, null)) {
+				if (!chestpiece.isEmpty && chestpiece.hasCapability(OxygenCaps.HANDLER, null) &&
+					helmet != null && helmet.hasCapability(UUCapabilities.BREATHING_AID!!, null)) {
 					event.isCanceled = true
 
 					GlStateManager.enableBlend()
@@ -57,9 +57,9 @@ object ClientEventHandler {
 					val left = res.scaledWidth / 2 + 91
 					val top = res.scaledHeight - GuiIngameForge.right_height
 
-					val handler = chestpiece.getCapability(OxygenCaps.HANDLER, null)
-					val full = MathHelper.ceiling_double_int((handler.stored - 2).toDouble() * 10.0 / handler.capacity.toDouble())
-					val partial = MathHelper.ceiling_double_int(handler.stored.toDouble() * 10.0 / handler.capacity.toDouble()) - full
+					val handler = chestpiece.getCapability(OxygenCaps.HANDLER, null)!!
+					val full = MathHelper.ceil((handler.stored - 2).toDouble() * 10.0 / handler.capacity.toDouble())
+					val partial = MathHelper.ceil(handler.stored.toDouble() * 10.0 / handler.capacity.toDouble()) - full
 
 					for (i in 0..full + partial - 1) {
 						Minecraft.getMinecraft().textureManager.bindTexture(HUD_TEXTURE)
@@ -82,7 +82,7 @@ object ClientEventHandler {
 		if (player is EntityPlayer) {
 			if (event.state.material == Material.WATER) {
 				val helmet = player.inventory.armorItemInSlot(3)
-				if (helmet != null && helmet.item == UUItems.breather) {
+				if (!helmet.isEmpty && helmet.item == UUItems.breather) {
 					event.density = 0f
 					event.isCanceled = true
 				}
@@ -92,12 +92,12 @@ object ClientEventHandler {
 
 	@SubscribeEvent
 	fun onRenderTick(event: TickEvent.RenderTickEvent) {
-		val player = Minecraft.getMinecraft().thePlayer
+		val player = Minecraft.getMinecraft().player
 		if (player != null) {
 			val helmet = player.inventory.armorItemInSlot(3)
-			if (Minecraft.getMinecraft().theWorld.getBlockState(player.position.up()).material == Material.WATER &&
-					helmet != null && helmet.hasCapability(UUCapabilities.BREATHING_AID, null) &&
-					helmet.getCapability(UUCapabilities.BREATHING_AID, null).canBreathe(player)) {
+			if (Minecraft.getMinecraft().world.getBlockState(player.position.up()).material == Material.WATER &&
+					!helmet.isEmpty && helmet.hasCapability(UUCapabilities.BREATHING_AID!!, null) &&
+					helmet.getCapability(UUCapabilities.BREATHING_AID!!, null)!!.canBreathe(player)) {
 
 				if (event.phase == TickEvent.Phase.START) {
 					gamma = Minecraft.getMinecraft().gameSettings.gammaSetting

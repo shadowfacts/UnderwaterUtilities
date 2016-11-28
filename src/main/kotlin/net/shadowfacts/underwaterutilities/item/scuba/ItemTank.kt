@@ -11,6 +11,7 @@ import net.minecraft.item.ItemArmor
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.util.EnumFacing
+import net.minecraft.util.NonNullList
 import net.minecraftforge.client.model.ModelLoader
 import net.minecraftforge.common.capabilities.ICapabilityProvider
 import net.shadowfacts.shadowmc.ShadowMC
@@ -29,13 +30,13 @@ import net.shadowfacts.underwaterutilities.model.ModelScubaTank
 class ItemTank : ItemArmor(UUMaterials.SCUBA, 0, EntityEquipmentSlot.CHEST), ItemModelProvider {
 
 	init {
-		setRegistryName("scubaTank")
+		setRegistryName("scuba_tank")
 		unlocalizedName = registryName.toString()
 		creativeTab = CreativeTabs.MISC
 		hasSubtypes = true
 	}
 
-	override fun getSubItems(item: Item, tab: CreativeTabs?, subItems: MutableList<ItemStack>) {
+	override fun getSubItems(item: Item, tab: CreativeTabs?, subItems: NonNullList<ItemStack>) {
 		subItems.add(ItemStack(this))
 		val stack2 = ItemStack(this)
 		(stack2.getCapability(OxygenCaps.HANDLER, null) as OxygenHandlerImpl).stored = 12000f
@@ -51,7 +52,7 @@ class ItemTank : ItemArmor(UUMaterials.SCUBA, 0, EntityEquipmentSlot.CHEST), Ite
 	}
 
 	override fun addInformation(stack: ItemStack, player: EntityPlayer, tooltip: MutableList<String>, advanced: Boolean) {
-		val handler = stack.getCapability(OxygenCaps.HANDLER, EnumFacing.NORTH)
+		val handler = stack.getCapability(OxygenCaps.HANDLER, EnumFacing.NORTH)!!
 		tooltip.add(String.format("Oxygen: %.1f / %.0f", handler.stored, handler.capacity))
 	}
 

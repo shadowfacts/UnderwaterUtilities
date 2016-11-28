@@ -45,7 +45,7 @@ class ItemSnorkel : ItemArmor(UUMaterials.GOGGLES, 0, EntityEquipmentSlot.HEAD),
 
 			override fun canBreathe(player: EntityPlayer): Boolean {
 				if (!player.capabilities.isCreativeMode) {
-					val world = player.worldObj
+					val world = player.world
 					val pos = player.position.up() // player.getPosition() is the foot position, .up() is the head position
 					val state = world.getBlockState(pos)
 					if (state.material === Material.WATER) {
