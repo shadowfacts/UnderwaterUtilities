@@ -46,7 +46,7 @@ class ItemBreather : ItemArmor(UUMaterials.SCUBA, 0, EntityEquipmentSlot.HEAD), 
 		private val breathingAid = object : BreathingAid() {
 			override fun canBreathe(player: EntityPlayer): Boolean {
 				if (!player.capabilities.isCreativeMode && player.isInWater && player.air < 300) {
-					val chestpiece = player.inventory.armorItemInSlot(2)
+					val chestpiece = player.inventory.armorInventory[2]
 					if (chestpiece != null && chestpiece.hasCapability(OxygenCaps.PROVIDER, null)) {
 						val provider = chestpiece.getCapability(OxygenCaps.PROVIDER, null)
 						return provider.stored > 0
@@ -56,7 +56,7 @@ class ItemBreather : ItemArmor(UUMaterials.SCUBA, 0, EntityEquipmentSlot.HEAD), 
 			}
 
 			override fun breathe(player: EntityPlayer) {
-				val chestpiece = player.inventory.armorItemInSlot(2)
+				val chestpiece = player.inventory.armorInventory[2]
 				val provider = chestpiece.getCapability(OxygenCaps.PROVIDER, null)
 				val amount = provider.extract((300 - player.air).toFloat(), false)
 				player.air += amount.toInt()
