@@ -7,9 +7,11 @@ import net.minecraft.block.state.BlockStateContainer
 import net.minecraft.block.state.IBlockState
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.entity.EntityLivingBase
+import net.minecraft.item.Item
 import net.minecraft.util.EnumFacing
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
+import net.shadowfacts.shadowmc.ShadowMC
 import net.shadowfacts.shadowmc.block.BlockTE
 
 /**
@@ -51,6 +53,10 @@ class BlockCollector : BlockTE<TileEntityCollector>(Material.ROCK, "oxygenCollec
 	@Deprecated("")
 	override fun getStateFromMeta(meta: Int): IBlockState {
 		return defaultState.withProperty(FACING, EnumFacing.getFront(meta))
+	}
+
+	override fun initItemModel() {
+		ShadowMC.proxy.registerItemModel(Item.getItemFromBlock(this), getMetaFromState(defaultState), registryName)
 	}
 
 	override fun createTileEntity(world: World, state: IBlockState): TileEntityCollector {
