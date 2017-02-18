@@ -2,6 +2,7 @@ package net.shadowfacts.underwaterutilities.block
 
 import net.shadowfacts.shadowmc.block.ModBlocks
 import net.shadowfacts.underwaterutilities.block.collector.BlockCollector
+import net.shadowfacts.underwaterutilities.block.collector.ItemBlockCollector
 import net.shadowfacts.underwaterutilities.block.tank.BlockTank
 import net.shadowfacts.underwaterutilities.block.tank.ItemBlockTank
 
@@ -14,7 +15,7 @@ object UUBlocks : ModBlocks() {
 	var tank: BlockTank = BlockTank()
 
 	override fun init() {
-		register(collector)
+		register(collector, ItemBlockCollector(collector))
 		register(tank, ItemBlockTank(tank))
 	}
 
