@@ -35,7 +35,7 @@ class TileEntityTank : BaseTileEntity(), ITickable {
 	}
 
 	private fun calcLevel(): Int {
-		return (oxygen.stored / oxygen.capacity.toFloat() * 10).toInt()
+		return (oxygen.stored / oxygen.capacity * 10).toInt()
 	}
 
 	private fun oxygenChanged(tank: OxygenTank) {
@@ -43,7 +43,7 @@ class TileEntityTank : BaseTileEntity(), ITickable {
 		val newLevel = calcLevel()
 		if (level != newLevel) {
 			level = newLevel
-			world.setBlockState(pos, UnderwaterUtilities.blocks.tank.getDefaultState().withProperty(BlockTank.LEVEL, level))
+			world.setBlockState(pos, UnderwaterUtilities.blocks.tank.defaultState.withProperty(BlockTank.LEVEL, level))
 		}
 	}
 

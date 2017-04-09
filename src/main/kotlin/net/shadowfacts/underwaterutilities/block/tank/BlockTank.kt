@@ -20,6 +20,10 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 import net.minecraftforge.client.model.ModelLoader
+import net.minecraftforge.items.CapabilityItemHandler.ITEM_HANDLER_CAPABILITY
+import net.shadowfacts.forgelin.extensions.filter
+import net.shadowfacts.forgelin.extensions.forEach
+import net.shadowfacts.forgelin.extensions.get
 import net.shadowfacts.shadowmc.block.BlockTE
 import net.shadowfacts.shadowmc.oxygen.OxygenCaps
 import net.shadowfacts.shadowmc.oxygen.impl.OxygenHandlerImpl
@@ -116,8 +120,16 @@ class BlockTank : BlockTE<TileEntityTank>(Material.ROCK, "oxygen_tank") {
 
 	@Deprecated("")
 	override fun breakBlock(world: World, pos: BlockPos, state: IBlockState) {
+		val tile = getTileEntity(world, pos)
+
+		tile.getCapability(ITEM_HANDLER_CAPABILITY, EnumFacing.NORTH)!!.filter {
+			!it.isEmpty
+		}.forEach {
+			world.spawnEntity(EntityItem(world, pos.x.toDouble(), pos.y.toDouble(), pos.z.toDouble(), it))
+		}
+
 		val stack = ItemStack(this)
-		(stack.getCapability(OxygenCaps.HANDLER, EnumFacing.NORTH) as OxygenHandlerImpl).load(getTileEntity(world, pos).getCapability(OxygenCaps.HANDLER, EnumFacing.NORTH))
+		(stack.getCapability(OxygenCaps.HANDLER, EnumFacing.NORTH) as OxygenHandlerImpl).load(tile.getCapability(OxygenCaps.HANDLER, EnumFacing.NORTH))
 
 		val item = EntityItem(world, pos.x.toDouble(), pos.y.toDouble(), pos.z.toDouble(), stack)
 		world.spawnEntity(item)
