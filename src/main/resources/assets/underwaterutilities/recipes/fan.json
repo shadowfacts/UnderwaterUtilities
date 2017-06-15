@@ -1,0 +1,20 @@
+{
+	"type": "forge:ore_shaped",
+	"pattern": [
+		" B ",
+		"BIB",
+		" B "
+	],
+	"key": {
+		"B": {
+			"item": "underwaterutilities:blade"
+		},
+		"I": {
+			"type": "forge:ore_dict",
+			"ore": "ingotIron"
+		}
+	},
+	"result": {
+		"item": "underwaterutilities:fan"
+	}
+}

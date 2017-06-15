@@ -7,7 +7,7 @@ buildscript {
 		}
 	}
 	dependencies {
-		classpath "net.minecraftforge.gradle:ForgeGradle:2.2-SNAPSHOT"
+		classpath "net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT"
 		classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlin_version}"
 	}
 }
@@ -47,6 +47,7 @@ processResources {
 }
 
 repositories {
+	jcenter()
 	maven {
 		name "shadowfacts"
 		url "http://mvn.rx14.co.uk/shadowfacts/"
@@ -60,5 +61,5 @@ repositories {
 dependencies {
 	deobfCompile group: "net.shadowfacts", name: "ShadowMC", version: mc_version + "-" + shadowmc_version
 	deobfCompile group: "net.shadowfacts", name: "Forgelin", version: forgelin_version
-	deobfCompile group: "net.darkhax.tesla", name: "Tesla", version: "1.11-" + tesla_version
+	deobfCompile group: "net.darkhax.tesla", name: "Tesla-1.12", version: tesla_version
 }

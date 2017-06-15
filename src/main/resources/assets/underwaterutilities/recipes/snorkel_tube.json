@@ -1,0 +1,21 @@
+{
+	"type": "forge:ore_shaped",
+	"pattern": [
+		" ls",
+		"lsl",
+		" l "
+	],
+	"key": {
+		"l": {
+			"type": "forge:ore_dict",
+			"ore": "leather"
+		},
+		"s": {
+			"type": "forge:ore_dict",
+			"ore": "sugarcane"
+		}
+	},
+	"result": {
+		"item": "underwaterutilities:snorkel_tube"
+	}
+}

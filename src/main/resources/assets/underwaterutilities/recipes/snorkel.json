@@ -1,0 +1,14 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"ingredients": [
+		{
+			"item": "underwaterutilities:snorkel_tube"
+		},
+		{
+			"item": "underwaterutilities:goggles"
+		}
+	],
+	"result": {
+		"item": "underwaterutilities:snorkel"
+	}
+}

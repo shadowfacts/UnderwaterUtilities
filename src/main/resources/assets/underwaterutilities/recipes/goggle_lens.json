@@ -1,0 +1,25 @@
+{
+	"type": "forge:ore_shaped",
+	"pattern": [
+		"SIS",
+		"IGI",
+		"SIS"
+	],
+	"key": {
+		"S": {
+			"type": "forge:ore_dict",
+			"ore": "slimeball"
+		},
+		"I": {
+			"type": "forge:ore_dict",
+			"ore": "ingotIron"
+		},
+		"G": {
+			"type": "forge:ore_dict",
+			"ore": "paneGlassColorless"
+		}
+	},
+	"result": {
+		"item": "underwaterutilities:goggle_lens"
+	}
+}

@@ -1,0 +1,19 @@
+{
+	"type": "forge:ore_shaped",
+	"pattern": [
+		"Ii"
+	],
+	"key": {
+		"I": {
+			"type": "forge:ore_dict",
+			"ore": "ingotIron"
+		},
+		"i": {
+			"type": "forge:ore_dict",
+			"ore": "nuggetIron"
+		}
+	},
+	"result": {
+		"item": "underwaterutilities:blade"
+	}
+}

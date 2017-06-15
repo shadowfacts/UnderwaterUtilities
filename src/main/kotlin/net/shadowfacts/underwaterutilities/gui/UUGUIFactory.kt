@@ -9,20 +9,17 @@ import net.minecraftforge.fml.client.IModGuiFactory
  */
 class UUGUIFactory : IModGuiFactory {
 
-	override fun initialize(minecraftInstance: Minecraft) {
+	override fun initialize(minecraftInstance: Minecraft) {}
 
-	}
+	override fun hasConfigGui() = false
 
-	override fun mainConfigGuiClass(): Class<out GuiScreen> {
-		return UUConfigGUI::class.java
-	}
+	override fun createConfigGui(parentScreen: GuiScreen) = UUConfigGUI(parentScreen)
 
-	override fun runtimeGuiCategories(): Set<IModGuiFactory.RuntimeOptionCategoryElement>? {
-		return null
-	}
+	@Deprecated("")
+	override fun mainConfigGuiClass() = UUConfigGUI::class.java
 
-	override fun getHandlerFor(element: IModGuiFactory.RuntimeOptionCategoryElement): IModGuiFactory.RuntimeOptionGuiHandler? {
-		return null
-	}
+	override fun runtimeGuiCategories() = null
+
+	override fun getHandlerFor(element: IModGuiFactory.RuntimeOptionCategoryElement) = null
 
 }

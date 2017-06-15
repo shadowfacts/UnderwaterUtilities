@@ -1,0 +1,19 @@
+{
+	"type": "forge:ore_shaped",
+	"pattern": [
+		" g ",
+		"lll"
+	],
+	"key": {
+		"g": {
+			"item": "underwaterutilities:goggles"
+		},
+		"l": {
+			"type": "forge:ore_dict",
+			"ore": "leather"
+		}
+	},
+	"result": {
+		"item": "underwaterutilities:scuba_breather"
+	}
+}

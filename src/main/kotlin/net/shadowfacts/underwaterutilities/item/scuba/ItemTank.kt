@@ -2,6 +2,7 @@ package net.shadowfacts.underwaterutilities.item.scuba
 
 import net.minecraft.client.model.ModelBiped
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
+import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.player.EntityPlayer
@@ -12,6 +13,7 @@ import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.util.EnumFacing
 import net.minecraft.util.NonNullList
+import net.minecraft.world.World
 import net.minecraftforge.client.model.ModelLoader
 import net.minecraftforge.common.capabilities.ICapabilityProvider
 import net.shadowfacts.shadowmc.ShadowMC
@@ -36,11 +38,11 @@ class ItemTank : ItemArmor(UUMaterials.SCUBA, 0, EntityEquipmentSlot.CHEST), Ite
 		hasSubtypes = true
 	}
 
-	override fun getSubItems(item: Item, tab: CreativeTabs?, subItems: NonNullList<ItemStack>) {
-		subItems.add(ItemStack(this))
+	override fun getSubItems(tab: CreativeTabs, items: NonNullList<ItemStack>) {
+		items.add(ItemStack(this))
 		val stack2 = ItemStack(this)
 		(stack2.getCapability(OxygenCaps.HANDLER, null) as OxygenHandlerImpl).stored = 12000f
-		subItems.add(stack2)
+		items.add(stack2)
 	}
 
 	override fun getArmorModel(entityLiving: EntityLivingBase, stack: ItemStack, armorSlot: EntityEquipmentSlot, _default: ModelBiped): ModelBiped {
@@ -51,7 +53,7 @@ class ItemTank : ItemArmor(UUMaterials.SCUBA, 0, EntityEquipmentSlot.CHEST), Ite
 		ShadowMC.proxy.registerItemModel(this, 0, registryName)
 	}
 
-	override fun addInformation(stack: ItemStack, player: EntityPlayer, tooltip: MutableList<String>, advanced: Boolean) {
+	override fun addInformation(stack: ItemStack, world: World?, tooltip: MutableList<String>, flag: ITooltipFlag) {
 		val handler = stack.getCapability(OxygenCaps.HANDLER, EnumFacing.NORTH)!!
 		tooltip.add(String.format("Oxygen: %.1f / %.0f", handler.stored, handler.capacity))
 	}

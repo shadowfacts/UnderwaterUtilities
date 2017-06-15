@@ -8,6 +8,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent
 import net.minecraftforge.fml.common.network.NetworkRegistry
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
+import net.shadowfacts.shadowmc.capability.NoOpStorage
 import net.shadowfacts.shadowmc.capability.Storage
 import net.shadowfacts.underwaterutilities.api.item.BreathingAid
 import net.shadowfacts.underwaterutilities.api.item.Goggles
@@ -55,8 +56,8 @@ object UnderwaterUtilities {
 	}
 
 	private fun registerCapabilities() {
-		CapabilityManager.INSTANCE.register(Goggles::class.java, Storage<Goggles>(), Goggles::class.java)
-		CapabilityManager.INSTANCE.register(BreathingAid::class.java, Storage<BreathingAid>(), BreathingAid::class.java)
+		CapabilityManager.INSTANCE.register(Goggles::class.java, NoOpStorage<Goggles>(), Goggles::class.java)
+		CapabilityManager.INSTANCE.register(BreathingAid::class.java, NoOpStorage<BreathingAid>(), BreathingAid::class.java)
 	}
 
 }

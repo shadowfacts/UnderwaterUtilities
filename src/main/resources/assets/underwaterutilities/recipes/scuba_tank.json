@@ -1,0 +1,25 @@
+{
+	"type": "forge:ore_shaped",
+	"pattern": [
+		"iSi",
+		"I I"
+	],
+	"key": {
+		"i": {
+			"type": "forge:ore_dict",
+			"ore": "nuggetIron"
+		},
+		"S": {
+			"type": "forge:ore_dict",
+			"ore": "slimeball"
+		},
+		"I": {
+			"type": "forge:ore_dict",
+			"ore": "ingotIron"
+		}
+	},
+	"result": {
+		"item": "underwaterutilities:scuba_tank",
+		"data": 0
+	}
+}

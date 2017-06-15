@@ -1,6 +1,7 @@
 package net.shadowfacts.underwaterutilities.block.tank
 
 import net.minecraft.block.Block
+import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.Item
@@ -9,6 +10,7 @@ import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.util.EnumFacing
 import net.minecraft.util.NonNullList
+import net.minecraft.world.World
 import net.minecraftforge.common.capabilities.ICapabilityProvider
 import net.shadowfacts.shadowmc.oxygen.OxygenCaps
 import net.shadowfacts.shadowmc.oxygen.impl.OxygenHandlerImpl
@@ -24,14 +26,14 @@ class ItemBlockTank(block: Block) : ItemBlock(block) {
 		setHasSubtypes(true)
 	}
 
-	override fun getSubItems(item: Item, tab: CreativeTabs?, subItems: NonNullList<ItemStack>) {
-		subItems.add(ItemStack(this))
+	override fun getSubItems(tab: CreativeTabs, items: NonNullList<ItemStack>) {
+		items.add(ItemStack(this))
 		val stack2 = ItemStack(this)
 		(stack2.getCapability(OxygenCaps.HANDLER, null) as OxygenHandlerImpl).stored = 20000f
-		subItems.add(stack2)
+		items.add(stack2)
 	}
 
-	override fun addInformation(stack: ItemStack, player: EntityPlayer, tooltip: MutableList<String>, advanced: Boolean) {
+	override fun addInformation(stack: ItemStack, world: World?, tooltip: MutableList<String>, flag: ITooltipFlag) {
 		val oxygen = stack.getCapability(OxygenCaps.HANDLER, EnumFacing.NORTH)!!
 		tooltip.add(String.format("Oxygen: %.1f / %.0f", oxygen.stored, oxygen.capacity))
 	}

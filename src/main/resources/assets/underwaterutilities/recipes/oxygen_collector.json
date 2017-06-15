@@ -1,0 +1,24 @@
+{
+	"type": "forge:ore_shaped",
+	"pattern": [
+		"III",
+		"FRI",
+		"III"
+	],
+	"key": {
+		"I": {
+			"type": "forge:ore_dict",
+			"ore": "ingotIron"
+		},
+		"F": {
+			"item": "underwaterutilities:fan"
+		},
+		"R": {
+			"type": "forge:ore_dict",
+			"ore": "dustRedstone"
+		}
+	},
+	"result": {
+		"item": "underwaterutilities:oxygen_collector"
+	}
+}
