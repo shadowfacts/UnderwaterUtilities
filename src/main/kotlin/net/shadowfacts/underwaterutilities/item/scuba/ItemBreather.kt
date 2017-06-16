@@ -56,7 +56,7 @@ class ItemBreather : ItemArmor(UUMaterials.SCUBA, 0, EntityEquipmentSlot.HEAD), 
 			}
 
 			override fun breathe(player: EntityPlayer) {
-				val chestpiece = player.inventory.armorItemInSlot(2)
+				val chestpiece = player.inventory.armorInventory[2]
 				val provider = chestpiece.getCapability(OxygenCaps.PROVIDER, null)!!
 				val amount = provider.extract((300 - player.air).toFloat(), false)
 				player.air += amount.toInt()
