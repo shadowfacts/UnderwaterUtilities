@@ -18,7 +18,7 @@ import net.shadowfacts.underwaterutilities.api.item.Goggles
 /**
  * @author shadowfacts
  */
-class ItemGoggles : ItemArmor(UUMaterials.GOGGLES, 0, EntityEquipmentSlot.HEAD), ItemModelProvider {
+class ItemGoggles: ItemArmor(UUMaterials.GOGGLES, 0, EntityEquipmentSlot.HEAD), ItemModelProvider {
 
 	init {
 		setRegistryName("goggles")
@@ -30,11 +30,9 @@ class ItemGoggles : ItemArmor(UUMaterials.GOGGLES, 0, EntityEquipmentSlot.HEAD),
 		ModelLoader.setCustomModelResourceLocation(this, 0, ModelResourceLocation(registryName, "inventory"))
 	}
 
-	override fun initCapabilities(stack: ItemStack, nbt: NBTTagCompound?): ICapabilityProvider? {
-		return GogglesCapProvider()
-	}
+	override fun initCapabilities(stack: ItemStack, nbt: NBTTagCompound?) = GogglesCapProvider()
 
-	class GogglesCapProvider : ICapabilityProvider {
+	class GogglesCapProvider: ICapabilityProvider {
 
 		private val goggles = Goggles()
 

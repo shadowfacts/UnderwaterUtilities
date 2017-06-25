@@ -18,7 +18,7 @@ import net.shadowfacts.shadowmc.block.BlockTE
 /**
  * @author shadowfacts
  */
-class BlockCollector : BlockTE<TileEntityCollector>(Material.ROCK, "oxygen_collector") {
+class BlockCollector: BlockTE<TileEntityCollector>(Material.ROCK, "oxygen_collector") {
 
 	companion object {
 		val FACING: PropertyDirection = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL)
@@ -31,6 +31,12 @@ class BlockCollector : BlockTE<TileEntityCollector>(Material.ROCK, "oxygen_colle
 		setHardness(2f)
 		soundType = SoundType.STONE
 	}
+
+	override fun initItemModel() {
+		ShadowMC.proxy.registerItemModel(Item.getItemFromBlock(this), getMetaFromState(defaultState), registryName)
+	}
+
+	override fun createItemBlock() = ItemBlockCollector(this)
 
 	override fun createBlockState(): BlockStateContainer {
 		return BlockStateContainer(this, FACING)
@@ -56,16 +62,8 @@ class BlockCollector : BlockTE<TileEntityCollector>(Material.ROCK, "oxygen_colle
 		return defaultState.withProperty(FACING, EnumFacing.getFront(meta))
 	}
 
-	override fun initItemModel() {
-		ShadowMC.proxy.registerItemModel(Item.getItemFromBlock(this), getMetaFromState(defaultState), registryName)
-	}
+	override fun createTileEntity(world: World, state: IBlockState) = TileEntityCollector()
 
-	override fun createTileEntity(world: World, state: IBlockState): TileEntityCollector {
-		return TileEntityCollector()
-	}
-
-	override fun getTileEntityClass(): Class<TileEntityCollector> {
-		return TileEntityCollector::class.java
-	}
+	override fun getTileEntityClass() = TileEntityCollector::class.java
 
 }

@@ -24,7 +24,7 @@ import net.shadowfacts.underwaterutilities.item.ItemGoggles
 /**
  * @author shadowfacts
  */
-class ItemBreather : ItemArmor(UUMaterials.SCUBA, 0, EntityEquipmentSlot.HEAD), ItemModelProvider {
+class ItemBreather: ItemArmor(UUMaterials.SCUBA, 0, EntityEquipmentSlot.HEAD), ItemModelProvider {
 
 	init {
 		setRegistryName("scuba_breather")
@@ -36,11 +36,9 @@ class ItemBreather : ItemArmor(UUMaterials.SCUBA, 0, EntityEquipmentSlot.HEAD), 
 		ModelLoader.setCustomModelResourceLocation(this, 0, ModelResourceLocation("$MOD_ID:scuba_breather", "inventory"))
 	}
 
-	override fun initCapabilities(stack: ItemStack, nbt: NBTTagCompound?): ICapabilityProvider? {
-		return BreatherCapProvider()
-	}
+	override fun initCapabilities(stack: ItemStack, nbt: NBTTagCompound?) = BreatherCapProvider()
 
-	class BreatherCapProvider() : ICapabilityProvider {
+	class BreatherCapProvider: ICapabilityProvider {
 
 		private val goggles = Goggles()
 		private val breathingAid = object : BreathingAid() {

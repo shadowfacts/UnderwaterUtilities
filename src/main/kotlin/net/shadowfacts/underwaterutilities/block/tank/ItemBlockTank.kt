@@ -19,7 +19,7 @@ import net.shadowfacts.shadowmc.oxygen.impl.OxygenTankProvider
 /**
  * @author shadowfacts
  */
-class ItemBlockTank(block: Block) : ItemBlock(block) {
+class ItemBlockTank(block: Block): ItemBlock(block) {
 
 	init {
 		registryName = block.registryName

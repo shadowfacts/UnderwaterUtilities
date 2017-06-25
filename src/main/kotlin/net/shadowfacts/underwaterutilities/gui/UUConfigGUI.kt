@@ -8,4 +8,4 @@ import net.shadowfacts.underwaterutilities.UUConfig
 /**
  * @author shadowfacts
  */
-class UUConfigGUI(parent: GuiScreen) : GUIConfig(parent, MOD_ID, UUConfig.config)
+class UUConfigGUI(parent: GuiScreen): GUIConfig(parent, MOD_ID, UUConfig.config)

@@ -7,7 +7,7 @@ import net.minecraftforge.fml.client.IModGuiFactory
 /**
  * @author shadowfacts
  */
-class UUGUIFactory : IModGuiFactory {
+class UUGUIFactory: IModGuiFactory {
 
 	override fun initialize(minecraftInstance: Minecraft) {}
 

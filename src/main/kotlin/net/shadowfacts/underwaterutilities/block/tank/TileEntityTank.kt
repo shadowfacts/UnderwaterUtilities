@@ -21,7 +21,7 @@ import java.util.function.Consumer
 /**
  * @author shadowfacts
  */
-class TileEntityTank : BaseTileEntity(), ITickable {
+class TileEntityTank: BaseTileEntity(), ITickable {
 
 	@CapHolder(capabilities = arrayOf(OxygenHandler::class, OxygenProvider::class, OxygenReceiver::class))
 	private val oxygen = OxygenTank(20000f, 20f, Consumer<OxygenTank> { this.oxygenChanged(it) })

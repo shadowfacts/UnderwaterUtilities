@@ -12,6 +12,7 @@ import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.item.EntityItem
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.Item
+import net.minecraft.item.ItemBlock
 import net.minecraft.item.ItemStack
 import net.minecraft.util.EnumFacing
 import net.minecraft.util.EnumHand
@@ -35,7 +36,7 @@ import java.util.ArrayList
 /**
  * @author shadowfacts
  */
-class BlockTank : BlockTE<TileEntityTank>(Material.ROCK, "oxygen_tank") {
+class BlockTank: BlockTE<TileEntityTank>(Material.ROCK, "oxygen_tank") {
 
 	companion object {
 		val LEVEL: PropertyInteger = PropertyInteger.create("level", 0, 10)
@@ -54,38 +55,30 @@ class BlockTank : BlockTE<TileEntityTank>(Material.ROCK, "oxygen_tank") {
 	override fun initItemModel() {
 		ModelLoader.setCustomMeshDefinition(Item.getItemFromBlock(this)!!, MeshWrapper.of { stack ->
 			val handler = stack.getCapability(OxygenCaps.HANDLER, null)!!
-			val level = (handler.stored / handler.capacity.toFloat() * 10).toInt()
+			val level = (handler.stored / handler.capacity * 10).toInt()
 			ModelResourceLocation("$MOD_ID:oxygen_tank", "level=" + level)
 		})
 	}
 
-	@Deprecated("")
-	override fun getBoundingBox(state: IBlockState, source: IBlockAccess, pos: BlockPos): AxisAlignedBB {
-		return BOX
-	}
-
-	override fun getCollisionBoundingBox(blockState: IBlockState, world: IBlockAccess, pos: BlockPos): AxisAlignedBB? {
-		return BOX
-	}
+	override fun createItemBlock() = ItemBlockTank(this)
 
 	@Deprecated("")
-	override fun getSelectedBoundingBox(state: IBlockState, world: World, pos: BlockPos): AxisAlignedBB {
-		return BOX
-	}
-
-	override fun isSideSolid(state: IBlockState, world: IBlockAccess, pos: BlockPos, side: EnumFacing): Boolean {
-		return false
-	}
+	override fun getBoundingBox(state: IBlockState, source: IBlockAccess, pos: BlockPos) = BOX
 
 	@Deprecated("")
-	override fun isOpaqueCube(state: IBlockState): Boolean {
-		return false
-	}
+	override fun getCollisionBoundingBox(blockState: IBlockState, world: IBlockAccess, pos: BlockPos) = BOX
 
 	@Deprecated("")
-	override fun isFullCube(state: IBlockState): Boolean {
-		return false
-	}
+	override fun getSelectedBoundingBox(state: IBlockState, world: World, pos: BlockPos) = BOX
+
+	@Deprecated("")
+	override fun isSideSolid(state: IBlockState, world: IBlockAccess, pos: BlockPos, side: EnumFacing) = false
+
+	@Deprecated("")
+	override fun isOpaqueCube(state: IBlockState) = false
+
+	@Deprecated("")
+	override fun isFullCube(state: IBlockState) = false
 
 	override fun getStateForPlacement(world: World, pos: BlockPos, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float, meta: Int, placer: EntityLivingBase, hand: EnumHand): IBlockState {
 		val stack = placer.getHeldItem(hand)
@@ -138,16 +131,10 @@ class BlockTank : BlockTE<TileEntityTank>(Material.ROCK, "oxygen_tank") {
 	}
 
 	@Deprecated("")
-	override fun getDrops(world: IBlockAccess, pos: BlockPos, state: IBlockState, fortune: Int): List<ItemStack> {
-		return ArrayList()
-	}
+	override fun getDrops(world: IBlockAccess, pos: BlockPos, state: IBlockState, fortune: Int) = listOf<ItemStack>()
 
-	override fun createTileEntity(world: World, state: IBlockState): TileEntityTank {
-		return TileEntityTank()
-	}
+	override fun createTileEntity(world: World, state: IBlockState) = TileEntityTank()
 
-	override fun getTileEntityClass(): Class<TileEntityTank> {
-		return TileEntityTank::class.java
-	}
+	override fun getTileEntityClass() = TileEntityTank::class.java
 
 }

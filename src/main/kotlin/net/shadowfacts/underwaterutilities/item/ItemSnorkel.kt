@@ -34,14 +34,12 @@ class ItemSnorkel : ItemArmor(UUMaterials.GOGGLES, 0, EntityEquipmentSlot.HEAD),
 		ModelLoader.setCustomModelResourceLocation(this, 0, ModelResourceLocation("$MOD_ID:snorkel", "inventory"))
 	}
 
-	override fun initCapabilities(stack: ItemStack, nbt: NBTTagCompound?): ICapabilityProvider? {
-		return SnorkelCapProvider()
-	}
+	override fun initCapabilities(stack: ItemStack, nbt: NBTTagCompound?) = SnorkelCapProvider()
 
-	class SnorkelCapProvider() : ICapabilityProvider {
+	class SnorkelCapProvider: ICapabilityProvider {
 
 		private val goggles = Goggles()
-		private val breathingAid = object : BreathingAid() {
+		private val breathingAid = object: BreathingAid() {
 
 			override fun canBreathe(player: EntityPlayer): Boolean {
 				if (!player.capabilities.isCreativeMode) {

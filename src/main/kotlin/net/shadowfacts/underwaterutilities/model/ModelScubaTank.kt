@@ -7,7 +7,7 @@ import net.minecraft.entity.Entity
 /**
  * @author shadowfacts
  */
-object ModelScubaTank : ModelBiped() {
+object ModelScubaTank: ModelBiped() {
 
 	private val shape9: ModelRenderer
 

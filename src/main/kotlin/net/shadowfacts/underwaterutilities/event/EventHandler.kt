@@ -5,14 +5,18 @@ import net.minecraft.enchantment.EnchantmentHelper
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraftforge.event.entity.living.LivingEvent
 import net.minecraftforge.event.entity.player.PlayerEvent
+import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
+import net.shadowfacts.underwaterutilities.MOD_ID
 import net.shadowfacts.underwaterutilities.UUCapabilities
 
 /**
  * @author shadowfacts
  */
+@Mod.EventBusSubscriber(modid = MOD_ID)
 object EventHandler {
 
+	@JvmStatic
 	@SubscribeEvent
 	fun onLivingUpdate(event: LivingEvent.LivingUpdateEvent) {
 		if (event.entity is EntityPlayer) {
@@ -27,6 +31,7 @@ object EventHandler {
 		}
 	}
 
+	@JvmStatic
 	@SubscribeEvent
 	fun onBreakSpeed(event: PlayerEvent.BreakSpeed) {
 		val player = event.entityPlayer

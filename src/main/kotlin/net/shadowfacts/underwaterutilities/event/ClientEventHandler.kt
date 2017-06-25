@@ -11,8 +11,10 @@ import net.minecraftforge.client.GuiIngameForge
 import net.minecraftforge.client.event.EntityViewRenderEvent
 import net.minecraftforge.client.event.RenderBlockOverlayEvent
 import net.minecraftforge.client.event.RenderGameOverlayEvent
+import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 import net.minecraftforge.fml.common.gameevent.TickEvent
+import net.minecraftforge.fml.relauncher.Side
 import net.shadowfacts.shadowmc.oxygen.OxygenCaps
 import net.shadowfacts.underwaterutilities.MOD_ID
 import net.shadowfacts.underwaterutilities.UUCapabilities
@@ -22,11 +24,13 @@ import net.shadowfacts.underwaterutilities.util.drawTexturedModalRect
 /**
  * @author shadowfacts
  */
+@Mod.EventBusSubscriber(Side.CLIENT, modid = MOD_ID)
 object ClientEventHandler {
 
 	private val HUD_TEXTURE = ResourceLocation(MOD_ID, "textures/gui/hud.png")
 	private var gamma = 0f
 
+	@JvmStatic
 	@SubscribeEvent
 	fun onRenderWaterOverlay(event: RenderBlockOverlayEvent) {
 		if (event.overlayType == RenderBlockOverlayEvent.OverlayType.WATER) {
@@ -38,6 +42,7 @@ object ClientEventHandler {
 		}
 	}
 
+	@JvmStatic
 	@SubscribeEvent
 	fun onRenderAir(event: RenderGameOverlayEvent.Pre) {
 		if (event.type == RenderGameOverlayEvent.ElementType.AIR) {
@@ -76,6 +81,7 @@ object ClientEventHandler {
 		}
 	}
 
+	@JvmStatic
 	@SubscribeEvent
 	fun onRenderFog(event: EntityViewRenderEvent.FogDensity) {
 		val player = event.entity
@@ -90,6 +96,7 @@ object ClientEventHandler {
 		}
 	}
 
+	@JvmStatic
 	@SubscribeEvent
 	fun onRenderTick(event: TickEvent.RenderTickEvent) {
 		val player = Minecraft.getMinecraft().player

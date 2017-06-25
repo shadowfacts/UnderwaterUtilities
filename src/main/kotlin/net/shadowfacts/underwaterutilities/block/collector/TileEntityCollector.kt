@@ -17,7 +17,7 @@ import net.shadowfacts.underwaterutilities.util.energy.RFAdapter
 /**
  * @author shadowfacts
  */
-class TileEntityCollector : BaseTileEntity(), ITickable, RFAdapter {
+class TileEntityCollector: BaseTileEntity(), ITickable, RFAdapter {
 
 	@CapHolder(capabilities = arrayOf(ITeslaHolder::class, ITeslaConsumer::class, ITeslaProducer::class))
 	private val tesla = BaseTeslaContainer(0, 10, 10, 10)

@@ -10,15 +10,13 @@ import java.awt.Color
 /**
  * @author shadowfacts
  */
-class UITexturedOxygenIndicator(handler: OxygenHandler, id: String, vararg classes: String) : UIOxygenIndicator(handler, id, *classes) {
+class UITexturedOxygenIndicator(handler: OxygenHandler, id: String, vararg classes: String): UIOxygenIndicator(handler, id, *classes) {
 
 	init {
 		setStyle(UIAttribute.PRIMARY_COLOR, Color(0, 0, 0, 0))
 		setStyle(UIAttribute.SECONDARY_COLOR, Color(0xFF07789D.toInt()))
 	}
 
-	override fun getPreferredDimensions(): UIDimensions {
-		return UIDimensions(18, 66)
-	}
+	override fun getPreferredDimensions() = UIDimensions(18, 66)
 
 }

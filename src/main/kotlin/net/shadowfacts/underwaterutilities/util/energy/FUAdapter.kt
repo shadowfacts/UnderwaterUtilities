@@ -6,7 +6,7 @@ import net.minecraftforge.energy.IEnergyStorage
 /**
  * @author shadowfacts
  */
-class FUAdapter(private val tesla: BaseTeslaContainer) : IEnergyStorage {
+class FUAdapter(private val tesla: BaseTeslaContainer): IEnergyStorage {
 
 	override fun receiveEnergy(maxReceive: Int, simulate: Boolean): Int {
 		return tesla.givePower(maxReceive.toLong(), simulate).toInt()
@@ -16,20 +16,12 @@ class FUAdapter(private val tesla: BaseTeslaContainer) : IEnergyStorage {
 		return tesla.takePower(maxExtract.toLong(), simulate).toInt()
 	}
 
-	override fun getEnergyStored(): Int {
-		return tesla.storedPower.toInt()
-	}
+	override fun getEnergyStored() = tesla.storedPower.toInt()
 
-	override fun getMaxEnergyStored(): Int {
-		return tesla.capacity.toInt()
-	}
+	override fun getMaxEnergyStored() = tesla.capacity.toInt()
 
-	override fun canExtract(): Boolean {
-		return tesla.outputRate > 0
-	}
+	override fun canExtract() = tesla.outputRate > 0
 
-	override fun canReceive(): Boolean {
-		return tesla.inputRate > 0
-	}
+	override fun canReceive() = tesla.inputRate > 0
 
 }

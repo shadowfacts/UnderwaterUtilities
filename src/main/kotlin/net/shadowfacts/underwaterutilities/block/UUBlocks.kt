@@ -1,22 +1,14 @@
 package net.shadowfacts.underwaterutilities.block
 
-import net.shadowfacts.shadowmc.block.ModBlocks
 import net.shadowfacts.underwaterutilities.block.collector.BlockCollector
-import net.shadowfacts.underwaterutilities.block.collector.ItemBlockCollector
 import net.shadowfacts.underwaterutilities.block.tank.BlockTank
-import net.shadowfacts.underwaterutilities.block.tank.ItemBlockTank
 
 /**
  * @author shadowfacts
  */
-object UUBlocks : ModBlocks() {
+object UUBlocks {
 
-	var collector: BlockCollector = BlockCollector()
-	var tank: BlockTank = BlockTank()
-
-	override fun init() {
-		register(collector, ItemBlockCollector(collector))
-		register(tank, ItemBlockTank(tank))
-	}
+	val collector: BlockCollector = BlockCollector()
+	val tank: BlockTank = BlockTank()
 
 }

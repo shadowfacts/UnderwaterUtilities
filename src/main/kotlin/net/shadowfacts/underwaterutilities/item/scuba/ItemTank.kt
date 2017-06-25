@@ -29,7 +29,7 @@ import net.shadowfacts.underwaterutilities.model.ModelScubaTank
 /**
  * @author shadowfacts
  */
-class ItemTank : ItemArmor(UUMaterials.SCUBA, 0, EntityEquipmentSlot.CHEST), ItemModelProvider {
+class ItemTank: ItemArmor(UUMaterials.SCUBA, 0, EntityEquipmentSlot.CHEST), ItemModelProvider {
 
 	init {
 		setRegistryName("scuba_tank")
@@ -58,8 +58,6 @@ class ItemTank : ItemArmor(UUMaterials.SCUBA, 0, EntityEquipmentSlot.CHEST), Ite
 		tooltip.add(String.format("Oxygen: %.1f / %.0f", handler.stored, handler.capacity))
 	}
 
-	override fun initCapabilities(stack: ItemStack?, nbt: NBTTagCompound?): ICapabilityProvider? {
-		return OxygenTankProvider(12000f, 20f)
-	}
+	override fun initCapabilities(stack: ItemStack?, nbt: NBTTagCompound?) = OxygenTankProvider(12000f, 20f)
 
 }

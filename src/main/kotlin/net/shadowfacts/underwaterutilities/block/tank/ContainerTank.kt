@@ -12,7 +12,7 @@ import net.shadowfacts.shadowmc.inventory.SlotOxygenHandler
 /**
  * @author shadowfacts
  */
-class ContainerTank(pos: BlockPos, inv: InventoryPlayer, tank: TileEntityTank) : ContainerBase(pos) {
+class ContainerTank(pos: BlockPos, inv: InventoryPlayer, tank: TileEntityTank): ContainerBase(pos) {
 
 	init {
 		val handler = tank.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.NORTH)

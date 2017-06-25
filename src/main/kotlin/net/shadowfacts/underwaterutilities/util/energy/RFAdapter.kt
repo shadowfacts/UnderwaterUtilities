@@ -6,7 +6,7 @@ import net.darkhax.tesla.api.implementation.BaseTeslaContainer
 /**
  * @author shadowfacts
  */
-interface RFAdapter : IEnergyStorage {
+interface RFAdapter: IEnergyStorage {
 
 	val teslaContainer: BaseTeslaContainer
 
@@ -18,12 +18,8 @@ interface RFAdapter : IEnergyStorage {
 		return teslaContainer.takePower(maxExtract.toLong(), simulate).toInt()
 	}
 
-	override fun getEnergyStored(): Int {
-		return teslaContainer.storedPower.toInt()
-	}
+	override fun getEnergyStored() = teslaContainer.storedPower.toInt()
 
-	override fun getMaxEnergyStored(): Int {
-		return teslaContainer.capacity.toInt()
-	}
+	override fun getMaxEnergyStored() = teslaContainer.capacity.toInt()
 
 }
