@@ -1,6 +1,6 @@
 package net.shadowfacts.underwaterutilities.util.energy
 
-import cofh.api.energy.IEnergyStorage
+import cofh.redstoneflux.api.IEnergyStorage
 import net.darkhax.tesla.api.implementation.BaseTeslaContainer
 
 /**

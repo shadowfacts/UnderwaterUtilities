@@ -50,11 +50,14 @@ repositories {
 	jcenter()
 	maven {
 		name "shadowfacts"
-		url "http://mvn.rx14.co.uk/shadowfacts/"
+		url "http://maven.shadowfacts.net/"
 	}
 	maven {
 		name "darkhax"
 		url "http://maven.epoxide.xyz"
+	}
+	maven {
+		url "http://maven.covers1624.net"
 	}
 }
 
@@ -62,4 +65,5 @@ dependencies {
 	deobfCompile group: "net.shadowfacts", name: "ShadowMC", version: mc_version + "-" + shadowmc_version
 	deobfCompile group: "net.shadowfacts", name: "Forgelin", version: forgelin_version
 	deobfCompile group: "net.darkhax.tesla", name: "Tesla-1.12", version: tesla_version
+	deobfCompile group: "cofh", name: "RedstoneFlux", version: mc_version + "-" + rf_version, classifier: "universal"
 }

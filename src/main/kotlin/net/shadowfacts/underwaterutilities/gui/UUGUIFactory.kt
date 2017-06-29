@@ -15,11 +15,6 @@ class UUGUIFactory: IModGuiFactory {
 
 	override fun createConfigGui(parentScreen: GuiScreen) = UUConfigGUI(parentScreen)
 
-	@Deprecated("")
-	override fun mainConfigGuiClass() = UUConfigGUI::class.java
-
 	override fun runtimeGuiCategories() = null
-
-	override fun getHandlerFor(element: IModGuiFactory.RuntimeOptionCategoryElement) = null
 
 }
