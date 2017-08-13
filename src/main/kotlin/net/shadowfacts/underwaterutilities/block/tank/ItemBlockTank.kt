@@ -27,10 +27,12 @@ class ItemBlockTank(block: Block): ItemBlock(block) {
 	}
 
 	override fun getSubItems(tab: CreativeTabs, items: NonNullList<ItemStack>) {
-		items.add(ItemStack(this))
-		val stack2 = ItemStack(this)
-		(stack2.getCapability(OxygenCaps.HANDLER, null) as OxygenHandlerImpl).stored = 20000f
-		items.add(stack2)
+		if (tab == creativeTab) {
+			items.add(ItemStack(this))
+			val stack2 = ItemStack(this)
+			(stack2.getCapability(OxygenCaps.HANDLER, null) as OxygenHandlerImpl).stored = 20000f
+			items.add(stack2)
+		}
 	}
 
 	override fun addInformation(stack: ItemStack, world: World?, tooltip: MutableList<String>, flag: ITooltipFlag) {

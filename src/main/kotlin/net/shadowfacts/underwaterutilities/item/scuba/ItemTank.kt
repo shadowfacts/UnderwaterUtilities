@@ -39,10 +39,12 @@ class ItemTank: ItemArmor(UUMaterials.SCUBA, 0, EntityEquipmentSlot.CHEST), Item
 	}
 
 	override fun getSubItems(tab: CreativeTabs, items: NonNullList<ItemStack>) {
-		items.add(ItemStack(this))
-		val stack2 = ItemStack(this)
-		(stack2.getCapability(OxygenCaps.HANDLER, null) as OxygenHandlerImpl).stored = 12000f
-		items.add(stack2)
+		if (tab == creativeTab) {
+			items.add(ItemStack(this))
+			val stack2 = ItemStack(this)
+			(stack2.getCapability(OxygenCaps.HANDLER, null) as OxygenHandlerImpl).stored = 12000f
+			items.add(stack2)
+		}
 	}
 
 	override fun getArmorModel(entityLiving: EntityLivingBase, stack: ItemStack, armorSlot: EntityEquipmentSlot, _default: ModelBiped): ModelBiped {
