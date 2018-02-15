@@ -1,0 +1,11 @@
+item.underwaterutilities:goggles.name=Masque de plongée
+item.underwaterutilities:goggle_lens.name=Verres
+item.underwaterutilities:scuba_breather.name=Masque et détendeur
+item.underwaterutilities:scuba_tank.name=Bouteille de plongée
+item.underwaterutilities:snorkel.name=Masque et tuba
+item.underwaterutilities:snorkel_tube.name=Tuba
+item.underwaterutilities:blade.name=Lame
+item.underwaterutilities:fan.name=Ventilateur
+
+tile.underwaterutilities:oxygen_collector.name=Compresseur
+tile.underwaterutilities:oxygen_tank.name=Réservoir à air comprimé
